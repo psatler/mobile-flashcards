@@ -4,13 +4,13 @@ import { createBottomTabNavigator } from 'react-navigation'
 import { Ionicons, FontAwesome } from '@expo/vector-icons'
 
 // screens
-import Decks from './Decks'
+import DeckList from './DeckList'
 import NewDeck from './NewDeck'
 
 
 const Tabs = createBottomTabNavigator({
-    Decks: {
-        screen: Decks,
+    DeckList: {
+        screen: DeckList,
         navigationOptions: {
             tabBarLabel: 'Decks',
             tabBarIcon: ({ tintColor}) => <Ionicons name='ios-bookmarks' size={30} color={tintColor} />

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet } from 'react-native'
 
-const Decks = () => {
+const DeckList = () => {
     return (
         <View style={styles.container} >
             <Text> List of Decks </Text>
@@ -18,7 +18,7 @@ const Decks = () => {
 //     }
 // }
 
-export default Decks;
+export default DeckList;
 
 const styles = StyleSheet.create({
     container: {
