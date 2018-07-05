@@ -1,31 +1,43 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet } from 'react-native'
 
-const DeckList = () => {
-    return (
-        <View style={styles.container} >
-            <Text> List of Decks </Text>
-        </View>
-    ) 
+import Deck from './Deck'
+
+import { data } from '../utils/mockData'
+
+
+
+class DeckList extends Component {
+    render() {
+        // const deckData = data;
+        // const deckData = Object.keys(data).map(key => data[key])
+        // console.log(deckData)
+
+        return (
+            <View style={styles.container} >
+                {Object.keys(data).map( (key) => {
+                    const { title, questions } = data[key]
+                    
+                    return (
+                        <Deck 
+                        key={key}
+                        deckName={title}
+                        deckSize={questions.length}
+
+                    />
+                    )
+                })}
+
+            </View>
+        )
+    }
 }
-// class Decks extends Component {
-//     render() {
-//         return (
-//             <View style={styles.container} >
-//                 <Text> List of Decks </Text>
-//             </View>
-//         )
-//     }
-// }
 
 export default DeckList;
 
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-    //   backgroundColor: '#fff',
-    //   alignItems: 'center',
-    //   justifyContent: 'center',
     },
 });
 
