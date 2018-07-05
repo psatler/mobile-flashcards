@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Platform } from 'react-native';
 
 import Tabs from './components/NavigationTabs'
 import CustomStatusBar from './components/CustomStatusBar'
+import { purple } from './utils/colors';
 
 
 
@@ -11,7 +12,7 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <CustomStatusBar backgroundColor={'purple'} barStyle='light-content' />
+        <CustomStatusBar backgroundColor={purple} barStyle='light-content' />
         <Tabs />
 
         {/* <Text>Opening up App.js to start working on your app!</Text>
