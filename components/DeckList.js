@@ -10,6 +10,7 @@ import { data } from '../utils/mockData'
 class DeckList extends Component {
     render() {
 
+        // data is from the mockData array
         return (
             <View style={styles.container} >
                 {Object.keys(data).map( (key) => {

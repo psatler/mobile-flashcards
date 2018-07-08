@@ -26,6 +26,9 @@ const Tabs = createBottomTabNavigator(
             tabBarIcon: ({ tintColor}) => <Ionicons name='ios-bookmarks' size={30} color={tintColor} />
         }
     }
+},
+{
+    //TODO: put some styles on navigation options
 })
 
 
