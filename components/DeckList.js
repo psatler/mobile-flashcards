@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
 
 import Deck from './Deck'
-import { retrieveData } from '../utils/asyncDB'
+import { getDecks } from '../utils/asyncDB'
 
 //redux stuff
 import { connect } from 'react-redux'
@@ -19,10 +19,8 @@ class DeckList extends Component {
     }
 
     componentDidMount(){
-
-
-        //load data from AsyncStorage
-        retrieveData() //this an async function
+        
+        getDecks() //async function to get decks from AsyncStorage 
             .then( (decks) => this.props.dispatch(retrieveDecks(decks)))
             .then( () => {
                 // console.log('test das', test);

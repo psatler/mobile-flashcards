@@ -9,7 +9,7 @@ const setInitialData = async () => {
 }
 
 
-export const retrieveData = async () => {
+export const getDecks = async () => {
     try {
         let value = await AsyncStorage.getItem(FLASHCARDS_DECKS_KEY);
         if( value !== null){ //we have data
