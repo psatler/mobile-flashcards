@@ -3,6 +3,11 @@ import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
 
 import Deck from './Deck'
 import { retrieveData } from '../utils/asyncDB'
+
+//redux stuff
+import { connect } from 'react-redux'
+import { retrieveDecks } from '../actions'
+
 import { data } from '../utils/mockData'
 
 
@@ -14,11 +19,13 @@ class DeckList extends Component {
     }
 
     componentDidMount(){
+
+
         //load data from AsyncStorage
-        retrieveData()
-            // .then( (entries) => dispatch(receiveEntries(entries))) //insert my dispatch function
-            .then( (test) => {
-                console.log('test das', test);
+        retrieveData() //this an async function
+            .then( (decks) => this.props.dispatch(retrieveDecks(decks)))
+            .then( () => {
+                // console.log('test das', test);
 
                 this.setState({ isLoading: true })
             }
@@ -32,6 +39,9 @@ class DeckList extends Component {
 
     render() {
         const { isLoading } = this.state;
+        const { decks } = this.props; // decks come from mapStateToProps
+
+        // console.log('object keys ',Object.keys(decks))
         
         if(!isLoading){
             return (
@@ -45,8 +55,8 @@ class DeckList extends Component {
         // data is from the mockData array
         return (
             <View style={styles.container} >
-                {Object.keys(data).map( (key) => {
-                    const { title, questions } = data[key];
+                {Object.keys(decks).map( (key) => {
+                    const { title, questions } = decks[key];
                     
                     return (
                         <TouchableOpacity
@@ -70,11 +80,24 @@ class DeckList extends Component {
     }
 }
 
-export default DeckList;
+
+const mapStateToProps = (state) => {
+    return {
+        decks: state.deckReducer,
+    }
+}
+
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         retrieveDecks: (entries) => dispatch(retrieveDecks(entries)),
+//     }
+// }
 
 const styles = StyleSheet.create({
     container: {
       flex: 1,
     },
 });
+
+export default connect(mapStateToProps)(DeckList);
 

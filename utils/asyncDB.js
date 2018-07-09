@@ -14,7 +14,8 @@ export const retrieveData = async () => {
         let value = await AsyncStorage.getItem(FLASHCARDS_DECKS_KEY);
         if( value !== null){ //we have data
             // console.log('decks', value);
-            return value;
+            let parsedObj = JSON.parse(value); //parsing back to object
+            return parsedObj;
         } else { //if not, we set initial state
             console.log('setting initial state');
             setInitialData(); //defined above
