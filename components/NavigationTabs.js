@@ -7,6 +7,7 @@ import { Ionicons, FontAwesome } from '@expo/vector-icons'
 import DeckList from './DeckList'
 import NewDeck from './NewDeck'
 import DeckDetail from './DeckDetail'
+import NewCard from './NewCard'
 import { white, purple } from '../utils/colors';
 
 
@@ -46,6 +47,9 @@ const MainNavigator = createStackNavigator(
     },
     DeckDetail: {
         screen: DeckDetail,
+    },
+    NewCard: {
+        screen: NewCard,
     }
 },
 {
