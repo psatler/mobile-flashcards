@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Text, View, TouchableOpacity, StyleSheet, Platform } from 'react-native'
 import { purple, orange, white } from '../utils/colors';
 
+import Deck from './Deck'
+
 class DeckDetail extends Component {
     //dinamically setting specific options for the Stack Navigator
     static navigationOptions = ({ navigation }) => {
@@ -23,13 +25,19 @@ class DeckDetail extends Component {
     render() {
         const { navigation } = this.props;
         const deckTitle = navigation.getParam('deckTitle', 'defaultTitle');
+        const deckLength = navigation.getParam('deckLength', '0');
 
         return (
             <View style={styles.container} >
-                <View style={styles.deckInfo} >
+                <Deck 
+                    deckName={deckTitle}
+                    deckSize={deckLength}
+                />
+                
+                {/* <View style={styles.deckInfo} >
                     <Text> {JSON.stringify(deckTitle)} </Text>
                     <Text> {deckTitle} </Text>
-                </View>
+                </View> */}
 
                 <TouchableOpacity style={styles.buttons} >
                     <Text style={styles.addCardButtonText} >Add Card</Text>
