@@ -62,7 +62,9 @@ class DeckDetail extends Component {
                 
                 <TouchableOpacity 
                     style={styles.buttons} 
-                    onPress={ () => this.props.navigation.navigate('StartQuiz')}    
+                    onPress={ () => this.props.navigation.navigate('StartQuiz', {
+                        deck: singleDeck, //passing the whole deck (title and questions/answers)
+                    }) }       
                 >
                     <Text style={styles.startQuizButtonText} > Start Quiz </Text>
                 </TouchableOpacity>
