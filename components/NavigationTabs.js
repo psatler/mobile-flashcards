@@ -8,6 +8,8 @@ import DeckList from './DeckList'
 import NewDeck from './NewDeck'
 import DeckDetail from './DeckDetail'
 import NewCard from './NewCard'
+import StartQuiz from './StartQuiz'
+
 import { white, purple } from '../utils/colors';
 
 
@@ -50,6 +52,9 @@ const MainNavigator = createStackNavigator(
     },
     NewCard: {
         screen: NewCard,
+    },
+    StartQuiz: {
+        screen: StartQuiz,
     }
 },
 {
