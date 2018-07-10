@@ -2,10 +2,18 @@ import React, { Component } from 'react'
 import { Text, View, TouchableOpacity, TextInput, 
     StyleSheet, Dimensions, KeyboardAvoidingView, Platform } from 'react-native'
 import { gray, white } from '../utils/colors';
+import { addCardToDeck } from '../utils/asyncDB'
 
 class NewCard extends Component {
 
     //TODO: we might have to add a header title here as ADD CARD 
+    static navigationOptions = ({ navigation }) => {
+        // console.log('navigation.state.params', navigation.state)
+        // const { title } = navigation.state.params;
+        return {
+            title: 'ADD CARD', //from nav params (above)
+        }
+    }
 
     state = {
         questionInput: '',
@@ -20,10 +28,35 @@ class NewCard extends Component {
         this.setState( { answerInput: answer} )
     }
 
-    submitButton = () => {
+    submitCard = () => {
         const { questionInput, answerInput } = this.state;
+        const { title } = this.props.navigation.state.params;
 
-        alert('Question: ' + questionInput + '\n\n' + 'Answer: ' + answerInput);
+        if(questionInput.trim() && answerInput.trim()){
+            const questionObj = {
+                question: questionInput,
+                answer: answerInput,
+            }
+    
+            //update redux
+    
+            //update DB
+            addCardToDeck(title, questionObj)
+    
+            //reset state
+            this.setState({
+                questionInput: '',
+                answerInput: '',
+            })
+    
+            this.props.navigation.goBack();
+        } else {
+            alert('Do not let input fields in blank');
+        }
+
+        
+
+        // alert('Question: ' + questionInput + '\n\n' + 'Answer: ' + answerInput);
     }
 
 

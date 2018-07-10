@@ -37,7 +37,7 @@ class NewDeck extends Component {
                 questions: [],
             }
 
-            const keyTitle = input.trim(); //TODO: trim spaces around and in-between
+            const keyTitle = input.split(' ').join(''); //TODO: trim spaces around and in-between
 
             //update redux
             this.props.dispatch(addDeck({ [keyTitle]: deck }));
@@ -54,9 +54,6 @@ class NewDeck extends Component {
             saveDeckTitle(keyTitle, deck);
         }
 
-        
-
-        
         // alert('This was the input: ' + input);
     }
 

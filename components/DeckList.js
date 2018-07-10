@@ -8,7 +8,7 @@ import { getDecks } from '../utils/asyncDB'
 import { connect } from 'react-redux'
 import { retrieveDecks } from '../actions'
 
-import { data } from '../utils/mockData'
+// import { data } from '../utils/mockData'
 
 
 //DeckList is the main screen (initial route)

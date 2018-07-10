@@ -24,6 +24,7 @@ class DeckDetail extends Component {
 
     render() {
         const { navigation } = this.props;
+        //getting parameters from nav
         const deckTitle = navigation.getParam('deckTitle', 'defaultTitle');
         const deckLength = navigation.getParam('deckLength', '0');
 
@@ -41,10 +42,13 @@ class DeckDetail extends Component {
 
                 <TouchableOpacity 
                     style={styles.buttons} 
-                    onPress={ () => this.props.navigation.navigate('NewCard', {}) }    
+                    onPress={ () => this.props.navigation.navigate('NewCard', {
+                        title: deckTitle,
+                    }) }    
                 >
                     <Text style={styles.addCardButtonText} >Add Card</Text>
                 </TouchableOpacity>
+                
                 <TouchableOpacity style={styles.buttons} >
                     <Text style={styles.startQuizButtonText} > Start Quiz </Text>
                 </TouchableOpacity>

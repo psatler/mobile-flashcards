@@ -21,15 +21,9 @@ export const getDecks = async () => {
             setInitialData(); //defined above
         }
     } catch (err) {
-        console.log('Aconteceu um erro: ', err);
+        console.log('There was an error retrieving decks from local DB: ', err);
     }
 }
-
-// export function submitEntry({ entry, key}) {
-//     return AsyncStorage.mergeItem(CALENDAR_STORAGE_KEY, JSON.stringify({
-//         [key]: entry,
-//     }))
-// }
 
 export const saveDeckTitle = (keyTitle, deckObj) => {
     try {
@@ -42,6 +36,24 @@ export const saveDeckTitle = (keyTitle, deckObj) => {
     }
 }
 
+export const addCardToDeck = (deckTitle, card) => {
+    const key = deckTitle.split(' ').join(''); //taking the spaces out
+
+    return AsyncStorage.getItem(FLASHCARDS_DECKS_KEY)
+        .then( (results) => {
+            const allDecks = JSON.parse(results);
+            const deck = allDecks[key];
+            console.log('addCardToDeck- BEFORE', deck.questions)
+            deck.questions.push(card)
+            console.log('addCardToDeck', deck.questions)
+            console.log('allDecks', allDecks)
+
+            AsyncStorage.setItem(FLASHCARDS_DECKS_KEY, JSON.stringify(allDecks)); //updating 
+
+        })
+        // const key = deckTitle.split(' ').join('');
+
+}
 
 // 
 
