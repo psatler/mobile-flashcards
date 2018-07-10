@@ -37,7 +37,7 @@ class NewDeck extends Component {
                 questions: [],
             }
 
-            const keyTitle = input.split(' ').join(''); //TODO: trim spaces around and in-between
+            const keyTitle = input.split(' ').join(''); //taking out the spaces to store key without'em
 
             //update redux
             this.props.dispatch(addDeck({ [keyTitle]: deck }));

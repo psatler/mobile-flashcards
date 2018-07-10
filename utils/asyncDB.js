@@ -37,16 +37,16 @@ export const saveDeckTitle = (keyTitle, deckObj) => {
 }
 
 export const addCardToDeck = (deckTitle, card) => {
-    const key = deckTitle.split(' ').join(''); //taking the spaces out
+    const key = deckTitle;
 
     return AsyncStorage.getItem(FLASHCARDS_DECKS_KEY)
         .then( (results) => {
             const allDecks = JSON.parse(results);
             const deck = allDecks[key];
-            console.log('addCardToDeck- BEFORE', deck.questions)
+            // console.log('addCardToDeck- BEFORE', deck.questions)
             deck.questions.push(card)
-            console.log('addCardToDeck', deck.questions)
-            console.log('allDecks', allDecks)
+            // console.log('addCardToDeck', deck.questions)
+            // console.log('allDecks', allDecks)
 
             AsyncStorage.setItem(FLASHCARDS_DECKS_KEY, JSON.stringify(allDecks)); //updating 
 

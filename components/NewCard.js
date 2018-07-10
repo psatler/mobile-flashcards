@@ -4,6 +4,10 @@ import { Text, View, TouchableOpacity, TextInput,
 import { gray, white } from '../utils/colors';
 import { addCardToDeck } from '../utils/asyncDB'
 
+//redux stuff
+import { connect } from 'react-redux'
+import { addCard } from '../actions'
+
 class NewCard extends Component {
 
     //TODO: we might have to add a header title here as ADD CARD 
@@ -31,6 +35,7 @@ class NewCard extends Component {
     submitCard = () => {
         const { questionInput, answerInput } = this.state;
         const { title } = this.props.navigation.state.params;
+        const key = title.split(' ').join(''); //taking the spaces out
 
         if(questionInput.trim() && answerInput.trim()){
             const questionObj = {
@@ -39,9 +44,10 @@ class NewCard extends Component {
             }
     
             //update redux
+            this.props.dispatch(addCard(key, questionObj));
     
             //update DB
-            addCardToDeck(title, questionObj)
+            addCardToDeck(key, questionObj); //passing key (which is the title without spaces) and the question and answer pair
     
             //reset state
             this.setState({
@@ -125,4 +131,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default NewCard;
+export default connect()(NewCard);

@@ -4,6 +4,8 @@ import { purple, orange, white } from '../utils/colors';
 
 import Deck from './Deck'
 
+import { connect } from 'react-redux'
+
 class DeckDetail extends Component {
     //dinamically setting specific options for the Stack Navigator
     static navigationOptions = ({ navigation }) => {
@@ -22,28 +24,37 @@ class DeckDetail extends Component {
         }
     }
 
+    filterDeck = (deckTitle) => {
+        const key = deckTitle.split(' ').join('');
+        const { decks } = this.props;
+        const deck = decks[key];
+
+        return deck;
+    }
+
     render() {
         const { navigation } = this.props;
         //getting parameters from nav
         const deckTitle = navigation.getParam('deckTitle', 'defaultTitle');
-        const deckLength = navigation.getParam('deckLength', '0');
+        // const deckLength = navigation.getParam('deckLength', '0');
+
+        // console.log('this.state.deckReducer',this.props.decks)
+
+        const singleDeck = this.filterDeck(deckTitle);
+
+        // const { singleDeck } = this.state.singleDeck
 
         return (
             <View style={styles.container} >
                 <Deck 
-                    deckName={deckTitle}
-                    deckSize={deckLength}
+                    deckName={singleDeck.title}
+                    deckSize={singleDeck.questions.length}
                 />
-
-                {/* <View style={styles.deckInfo} >
-                    <Text> {JSON.stringify(deckTitle)} </Text>
-                    <Text> {deckTitle} </Text>
-                </View> */}
 
                 <TouchableOpacity 
                     style={styles.buttons} 
                     onPress={ () => this.props.navigation.navigate('NewCard', {
-                        title: deckTitle,
+                        title: singleDeck.title,
                     }) }    
                 >
                     <Text style={styles.addCardButtonText} >Add Card</Text>
@@ -54,6 +65,12 @@ class DeckDetail extends Component {
                 </TouchableOpacity>
             </View>
         )
+    }
+}
+
+const mapStateToProps = (state) => {
+    return {
+        decks: state.deckReducer,
     }
 }
 
@@ -85,4 +102,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default DeckDetail;
+export default connect(mapStateToProps)(DeckDetail);
