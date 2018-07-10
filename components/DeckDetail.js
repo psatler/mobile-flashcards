@@ -33,13 +33,16 @@ class DeckDetail extends Component {
                     deckName={deckTitle}
                     deckSize={deckLength}
                 />
-                
+
                 {/* <View style={styles.deckInfo} >
                     <Text> {JSON.stringify(deckTitle)} </Text>
                     <Text> {deckTitle} </Text>
                 </View> */}
 
-                <TouchableOpacity style={styles.buttons} >
+                <TouchableOpacity 
+                    style={styles.buttons} 
+                    onPress={ () => this.props.navigation.navigate('NewCard', {}) }    
+                >
                     <Text style={styles.addCardButtonText} >Add Card</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.buttons} >
