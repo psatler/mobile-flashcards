@@ -3,7 +3,11 @@ import { Text, View, StyleSheet, TextInput,
     Platform, TouchableOpacity, KeyboardAvoidingView, Dimensions } from 'react-native'
 import { gray, white } from '../utils/colors';
 
-// const Decks = () => {
+import { saveDeckTitle } from '../utils/asyncDB'
+import { connect } from 'react-redux'
+import { addDeck } from '../actions'
+import { NavigationActions } from 'react-navigation'
+
 class NewDeck extends Component {
 
     //local state for handling form inputs
@@ -15,6 +19,45 @@ class NewDeck extends Component {
         this.setState({
             input: deckTitle,
         })
+    }
+
+    toHome = () => {
+        this.props.navigation.navigate('DeckList')
+        // this.props.navigation.dispatch(NavigationActions.back({
+        //     key: 'DeckList',
+        // }))
+    }
+
+    submitDeck = () => {
+        const { input } = this.state;
+
+        if(input){
+            const deck = {
+                title: input,
+                questions: [],
+            }
+
+            const keyTitle = input.trim(); //TODO: trim spaces around and in-between
+
+            //update redux
+            this.props.dispatch(addDeck({ [keyTitle]: deck }));
+
+            //reset state
+            this.setState({
+                input: '',
+            })
+
+            //go back to home
+            this.toHome(); //which is DeckList component
+
+            //save to DB (async storage)
+            saveDeckTitle(keyTitle, deck);
+        }
+
+        
+
+        
+        // alert('This was the input: ' + input);
     }
 
     render() {
@@ -31,7 +74,7 @@ class NewDeck extends Component {
                     onChangeText={this.handleTextChange}
                 />
 
-                <TouchableOpacity style={styles.submitButton} >
+                <TouchableOpacity style={styles.submitButton} onPress={this.submitDeck}>
                     <Text style={styles.submitButtonText} > Submit </Text>
                 </TouchableOpacity>
             </KeyboardAvoidingView>
@@ -76,5 +119,5 @@ const styles = StyleSheet.create({
     }
 });
 
-export default NewDeck;
+export default connect()(NewDeck);
 

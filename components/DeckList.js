@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
+import { Text, View, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
 
 import Deck from './Deck'
 import { getDecks } from '../utils/asyncDB'
@@ -19,7 +19,7 @@ class DeckList extends Component {
     }
 
     componentDidMount(){
-        
+
         getDecks() //async function to get decks from AsyncStorage 
             .then( (decks) => this.props.dispatch(retrieveDecks(decks)))
             .then( () => {
@@ -29,7 +29,7 @@ class DeckList extends Component {
             }
         )
 
-        console.log('\n\n datas', data)
+        // console.log('\n\n datas', data)
 
         //update redux
 
@@ -52,7 +52,7 @@ class DeckList extends Component {
 
         // data is from the mockData array
         return (
-            <View style={styles.container} >
+            <ScrollView style={styles.container} >
                 {Object.keys(decks).map( (key) => {
                     const { title, questions } = decks[key];
                     
@@ -73,7 +73,7 @@ class DeckList extends Component {
                     )
                 })}
 
-            </View>
+            </ScrollView>
         )
     }
 }

@@ -25,6 +25,23 @@ export const getDecks = async () => {
     }
 }
 
+// export function submitEntry({ entry, key}) {
+//     return AsyncStorage.mergeItem(CALENDAR_STORAGE_KEY, JSON.stringify({
+//         [key]: entry,
+//     }))
+// }
+
+export const saveDeckTitle = (keyTitle, deckObj) => {
+    try {
+        return AsyncStorage.mergeItem(FLASHCARDS_DECKS_KEY, JSON.stringify({
+            [keyTitle]: deckObj
+        }))
+        
+    } catch (err) {
+        console.log(err);
+    }
+}
+
 
 // 
 
