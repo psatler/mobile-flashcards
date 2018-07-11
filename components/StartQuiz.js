@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Text, View, StyleSheet, TouchableOpacity, Platform } from 'react-native'
 
 import { connect } from 'react-redux'
-import { white, red, green, blue } from '../utils/colors';
+import { white, red, green, blue, gray } from '../utils/colors';
 
 class StartQuiz extends Component {
 
@@ -33,6 +33,7 @@ class StartQuiz extends Component {
         this.setState({
             currentIndex: currentIndex + 1,
             score: score + 1,
+            isQuestion: true, //switching back to question after an answer
         })
     }
 
@@ -40,6 +41,7 @@ class StartQuiz extends Component {
         const { currentIndex } = this.state;
         this.setState({
             currentIndex: currentIndex + 1,
+            isQuestion: true, //switching back to question after an answer
         })
     }
 
@@ -97,9 +99,10 @@ class StartQuiz extends Component {
                 <View style={styles.buttonRow} >
 
                     <TouchableOpacity 
+                        disabled={isQuestion} //if is question, disable button
                         style={[styles.button, { 
                             // borderColor: red,
-                            backgroundColor: red,
+                            backgroundColor: isQuestion ? gray : red,
                         } ]}
                         onPress={this.wrongAnswer}
                     >
@@ -109,9 +112,10 @@ class StartQuiz extends Component {
                     </TouchableOpacity>
 
                     <TouchableOpacity 
+                        disabled={isQuestion} //if is question, disable button
                         style={[styles.button, {
                             // borderColor: green, 
-                            backgroundColor: green, 
+                            backgroundColor: isQuestion ? gray : green, 
                         }]}
                         onPress={this.rightAnswer}
                     >
