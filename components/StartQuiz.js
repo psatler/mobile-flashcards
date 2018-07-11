@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Text, View, StyleSheet, TouchableOpacity, Platform } from 'react-native'
 
 import { connect } from 'react-redux'
-import { white } from '../utils/colors';
+import { white, red, green, blue } from '../utils/colors';
 
 class StartQuiz extends Component {
 
@@ -69,42 +69,55 @@ class StartQuiz extends Component {
 
         return (
             <View style={styles.container} >
-                <Text> Start Quiz </Text>
-                <Text> Score: {score} </Text>
+                <Text> Question: {currentIndex + 1} / {questions.length} </Text>
 
+                <View style={styles.cardContainer}>
                 {isQuestion === true ? ( //explicitly making the comparison for legibility sake
                     <View>
-                        <Text> Front </Text>
-                        <Text> {questions[currentIndex].question} </Text>
+                        <Text style={styles.questionAnswer} > {questions[currentIndex].question} </Text>
                     </View>
                  ) : (
                     <View>
-                        <Text> Back </Text>
-                        <Text> {questions[currentIndex].answer} </Text>
+                        <Text style={styles.questionAnswer} > {questions[currentIndex].answer} </Text>
                     </View>
                  ) }
+                </View>
 
             
                 <TouchableOpacity 
                     onPress={this.toggleQuestionAnswer} 
-                    style={styles.button}
+                    style={styles.switchButton}
                 >
-                    <Text style={styles.buttonText} > Flip </Text>
+                    {isQuestion === true ? (
+                        <Text style={styles.switchButtonText} > See Answer </Text>) : (
+                        <Text style={styles.switchButtonText} > See Question </Text>)
+                        }
                 </TouchableOpacity>
 
                 <View style={styles.buttonRow} >
+
                     <TouchableOpacity 
-                        style={styles.button}
-                        onPress={this.rightAnswer}
+                        style={[styles.button, { 
+                            // borderColor: red,
+                            backgroundColor: red,
+                        } ]}
+                        onPress={this.wrongAnswer}
                     >
-                        <Text style={styles.buttonText} > Correct </Text>
+                        <Text style={[styles.buttonText, { 
+                            // color: red 
+                            } ]} > Incorrect </Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity 
-                        style={styles.button}
-                        onPress={this.wrongAnswer}
+                        style={[styles.button, {
+                            // borderColor: green, 
+                            backgroundColor: green, 
+                        }]}
+                        onPress={this.rightAnswer}
                     >
-                        <Text style={styles.buttonText} > Incorrect </Text>
+                        <Text style={[styles.buttonText, {
+                            // color: green,
+                            }]} > Correct </Text>
                     </TouchableOpacity>
                 </View>
 
@@ -116,22 +129,56 @@ class StartQuiz extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        // justifyContent: 'space-between'
+    },
+    questionAnswer: {
+        textAlign: 'center',
+        fontSize: 40,
+    },
+    cardContainer: {
+        flex: 1, //to make it fill the majority of the space available
+        margin: 5,
+        marginBottom: 25,
+        borderWidth: 1,
+        borderColor: 'black',
+        borderRadius: Platform.OS === 'ios' ? 16 : 2,
+        backgroundColor: white,
+    },
+    switchButton: {
+        alignSelf: 'center',
+        backgroundColor: white,
+        padding: 10,
+        // width: 100,
+        borderWidth: 1,
+        borderColor: blue,
+        borderRadius: Platform.OS === 'ios' ? 16 : 2,
+    },
+    switchButtonText: {
+        fontSize: 15,
+        color: blue,
     },
     buttonRow: {
+        // flex: 1, //making it fill the available content
         flexDirection: 'row',
         justifyContent: 'space-around',
+        // marginTop: 25,
+        // alignItems: 'flex-end',
+        // backgroundColor: white,
+        
     },
     button: {
-        // alignItems: 'center',
+        // alignSelf: 'flex-end' , //pushing it to the bottom
         marginTop: 25,
+        marginBottom: 25,
         padding: 10,
         borderRadius: Platform.OS === 'ios' ? 16 : 2,
-        backgroundColor: 'black',
+        // borderWidth: 1,
+        // backgroundColor: white,
     },
     buttonText: {
         fontSize: 15,
         color: white,
-        padding: 5,
+        padding: 3,
     }
 
 
