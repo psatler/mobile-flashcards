@@ -4,13 +4,19 @@ import { StyleSheet, Text, View, Platform } from 'react-native';
 import { Provider } from 'react-redux'
 import store from './store'
 
+import { setLocalNotification } from './utils/localNotifications'
 import MainNavigator from './components/NavigationTabs'
 import CustomStatusBar from './components/CustomStatusBar'
 import { purple } from './utils/colors';
 
 
 
+
 export default class App extends React.Component {
+
+  componentDidMount(){
+    setLocalNotification(); //it's being set to 10 AM (everyday)
+  }
 
   render() {
     return (
