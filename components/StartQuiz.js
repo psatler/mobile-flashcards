@@ -4,6 +4,8 @@ import { Text, View, StyleSheet, TouchableOpacity, Platform } from 'react-native
 import { connect } from 'react-redux'
 import { white, red, green, blue, gray } from '../utils/colors';
 
+import AnimatedBasic from '../utils/flipCardAnimation'
+
 class StartQuiz extends Component {
 
     //TODO: we might have to add a header title here as ADD CARD 
@@ -74,7 +76,10 @@ class StartQuiz extends Component {
                 <Text> Question: {currentIndex + 1} / {questions.length} </Text>
 
                 <View style={styles.cardContainer}>
-                {isQuestion === true ? ( //explicitly making the comparison for legibility sake
+
+                    <AnimatedBasic />
+
+                {/* {isQuestion === true ? ( //explicitly making the comparison for legibility sake
                     <View>
                         <Text style={styles.questionAnswer} > {questions[currentIndex].question} </Text>
                     </View>
@@ -82,7 +87,8 @@ class StartQuiz extends Component {
                     <View>
                         <Text style={styles.questionAnswer} > {questions[currentIndex].answer} </Text>
                     </View>
-                 ) }
+                 ) } */}
+
                 </View>
 
             
