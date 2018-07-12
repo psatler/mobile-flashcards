@@ -4,7 +4,7 @@ import { Text, View, StyleSheet, TouchableOpacity, Platform } from 'react-native
 import { connect } from 'react-redux'
 import { white, red, green, blue, gray } from '../utils/colors';
 
-import AnimatedBasic from '../utils/flipCardAnimation'
+import FlipCardAnimation from '../utils/flipCardAnimation'
 
 class StartQuiz extends Component {
 
@@ -28,6 +28,8 @@ class StartQuiz extends Component {
         this.setState({ isQuestion: false }) : 
         this.setState({ isQuestion: true });
 
+        this.refs.child.flipCard(); // flip cards using a ref to child method
+
     }
 
     rightAnswer = () => {
@@ -37,6 +39,8 @@ class StartQuiz extends Component {
             score: score + 1,
             isQuestion: true, //switching back to question after an answer
         })
+
+        this.refs.child.flipCard(); //flipping back
     }
 
     wrongAnswer = () => {
@@ -45,6 +49,8 @@ class StartQuiz extends Component {
             currentIndex: currentIndex + 1,
             isQuestion: true, //switching back to question after an answer
         })
+
+        this.refs.child.flipCard(); //flipping back
     }
 
     
@@ -75,11 +81,9 @@ class StartQuiz extends Component {
             <View style={styles.container} >
                 <Text> Question: {currentIndex + 1} / {questions.length} </Text>
 
-                <View style={styles.cardContainer}>
+                {/* <View style={styles.cardContainer}>
 
-                    <AnimatedBasic />
-
-                {/* {isQuestion === true ? ( //explicitly making the comparison for legibility sake
+                {isQuestion === true ? ( //explicitly making the comparison for legibility sake
                     <View>
                         <Text style={styles.questionAnswer} > {questions[currentIndex].question} </Text>
                     </View>
@@ -87,8 +91,17 @@ class StartQuiz extends Component {
                     <View>
                         <Text style={styles.questionAnswer} > {questions[currentIndex].answer} </Text>
                     </View>
-                 ) } */}
+                 ) }
 
+                </View> */}
+
+                <View style={styles.cardContainer}>
+                    <FlipCardAnimation 
+                        showFront={isQuestion} 
+                        ref='child' //creating a ref so I can use a child's method from parent
+                        questionText={questions[currentIndex].question}
+                        answerText={questions[currentIndex].answer}
+                    />
                 </View>
 
             
@@ -152,7 +165,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: 'black',
         borderRadius: Platform.OS === 'ios' ? 16 : 2,
-        backgroundColor: white,
+        // backgroundColor: white,
     },
     switchButton: {
         alignSelf: 'center',

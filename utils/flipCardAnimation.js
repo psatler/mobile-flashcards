@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
+
 import {
   StyleSheet,
   Text,
   View,
   TouchableOpacity,
-  Animated
+  Platform,
+  Dimensions,
+  Animated,
 } from 'react-native';
+import { white, blue } from './colors';
 
-export default class AnimatedBasic extends Component {
+
+
+export default class FlipCardAnimation extends Component {
 
     state = {
         animatedValue: new Animated.Value(0),
@@ -15,7 +21,7 @@ export default class AnimatedBasic extends Component {
     }
 
     componentDidMount(){
-        const { animatedValue, listenerValue } = this.state;
+        const { animatedValue } = this.state;
 
         //creating a listener to track values changes
         animatedValue.addListener( ( { value } ) => {
@@ -46,6 +52,8 @@ export default class AnimatedBasic extends Component {
 
     render() {
         const { animatedValue, listenerValue } = this.state;
+        const { showFront } = this.props;
+        // console.log('isQuestion', showFront)
 
         const frontAnimatedStyle = {
           transform: [
@@ -66,8 +74,8 @@ export default class AnimatedBasic extends Component {
           transform: [
             { rotateY: animatedValue.interpolate({
                 inputRange: [0, 180],
-              //   outputRange: ['180deg', '360deg'],
-                outputRange: ['180deg', '0deg']
+                outputRange: ['180deg', '360deg'],
+                // outputRange: ['180deg', '0deg']
               }) 
             }
           ],
@@ -78,51 +86,74 @@ export default class AnimatedBasic extends Component {
         }
         
         return (
-          <View style={styles.container}>
-            <View>
-              <Animated.View style={[styles.flipCard, frontAnimatedStyle]}>
-                <Text style={styles.flipText}>
-                  This text is flipping on the front.
-                </Text>
-              </Animated.View>
-              <Animated.View style={[backAnimatedStyle, styles.flipCard, styles.flipCardBack]}>
-                <Text style={styles.flipText}>
-                  This text is flipping on the back.
-                </Text>
-              </Animated.View>
+
+            <View >
+                <View style={styles.container} >
+                    {showFront === true ? (
+                    <Animated.View style={[styles.flipCard, frontAnimatedStyle]}>
+                        <Text style={styles.flipText}>
+                        {/* This text is flipping on the front. */}
+                            {this.props.questionText}
+                        </Text>
+                    </Animated.View>
+                    ) : (
+                    <Animated.View style={[backAnimatedStyle, styles.flipCard, styles.flipCardBack]}>
+                        <Text style={styles.flipText}>
+                        {/* This text is flipping on the back. */}
+                            {this.props.answerText}
+                        </Text>
+                    </Animated.View>
+                    )}
+                </View>
+
+                {/* <TouchableOpacity 
+                    onPress={() => this.flipCard()}
+                    style={styles.switchButton}    
+                >
+                    <Text>Flip!</Text>
+                </TouchableOpacity> */}
             </View>
-            <TouchableOpacity onPress={() => this.flipCard()}>
-              <Text>Flip!</Text>
-            </TouchableOpacity>
-          </View>
         );
       }
     }
 
-
+const {width, height} = Dimensions.get('window');
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  flipCard: {
-    width: 200,
-    height: 200,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'blue',
-    backfaceVisibility: 'hidden', //it means when the card rotates out of the way, it won't be visible. When it rotates back, it'll be visible again. Not working on Android though, so it was added an workaround for this above
-  },
-  flipCardBack: {
-    backgroundColor: "red",
-    position: "absolute",
-    top: 0,
-  },
-  flipText: {
-    width: 90,
-    fontSize: 20,
-    color: 'white',
-    fontWeight: 'bold',
-  }
+    container: {
+        // flex: 1, //to make it fill the majority of the space available
+        // alignItems: 'center',
+        // justifyContent: 'center',
+        
+    },
+    flipCard: {
+        // flex: 1,
+        margin: 5,
+        borderWidth: 1,
+        padding: 5,
+        borderColor: 'black',
+        borderRadius: Platform.OS === 'ios' ? 16 : 2,
+        backgroundColor: 'blue',
+        backfaceVisibility: 'hidden', //it means when the card rotates out of the way, it won't be visible. When it rotates back, it'll be visible again. Not working on Android though, so it was added an workaround for this above
+    },
+    flipCardBack: {
+        backgroundColor: "red",
+        // position: "absolute",
+        top: 0,
+    },
+    flipText: {
+        // width: 90,
+        textAlign: 'center',
+        fontSize: 0.075*width, //workaround to fit on small screens
+        color: 'white',
+        // fontWeight: 'bold',
+    },
+    switchButton: {
+        alignSelf: 'center',
+        backgroundColor: white,
+        padding: 10,
+        // width: 100,
+        borderWidth: 1,
+        borderColor: blue,
+        borderRadius: Platform.OS === 'ios' ? 16 : 2,
+    },
 });
