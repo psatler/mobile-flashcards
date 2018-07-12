@@ -4,6 +4,7 @@ import { Text, View, StyleSheet, TouchableOpacity, Platform } from 'react-native
 import { connect } from 'react-redux'
 import { white, red, green, blue, gray } from '../utils/colors';
 
+import ShowResult from './ShowResult'
 import FlipCardAnimation from '../utils/flipCardAnimation'
 
 class StartQuiz extends Component {
@@ -62,11 +63,7 @@ class StartQuiz extends Component {
         const { currentIndex, isQuestion, score } = this.state;
 
         if(questions.length === 0){
-            return (
-                <View>
-                    <Text> There is no cards inside this deck. Please insert some card to make quiz</Text>
-                </View>
-            )
+            return <ShowResult />
         }
 
         if(currentIndex >= questions.length){
