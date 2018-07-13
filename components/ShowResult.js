@@ -15,8 +15,19 @@ class ShowResult extends Component {
                 <View style={{flex: 0.5}}></View> 
 
                 <View style={styles.resultsContainer}>
-                    <Text style={styles.screenTitle} > Final Result </Text>
-                    <Text style={styles.resultMessage} > You've Got {score} out of {total} points possible! </Text>
+                    
+                    { total === 0 ? ( //there is no cards inside deck
+                        <View>
+                            <Text style={styles.screenTitle} > There is no cards inside this deck. </Text>
+                            <Text style={styles.resultMessage} > Please insert some card and do the quiz again </Text>
+                        </View>
+                    ) : (
+                        <View>
+                            <Text style={styles.screenTitle} > Final Result </Text>
+                            <Text style={styles.resultMessage} > You've Got {score} out of {total} points possible! </Text>
+                        </View>
+                    )
+                }
 
                     <View style={styles.buttonsContainer} >
                         <TouchableOpacity 
@@ -26,7 +37,7 @@ class ShowResult extends Component {
                             onPress={ () => this.props.navigation.goBack()}        
                         >
                             <EvilIcons name={'redo' } size={50}  />
-                            <Text> Redo Quiz </Text>
+                             { total === 0 ? ( <Text> Go Back </Text> ) : ( <Text> Redo Quiz </Text> ) }
                         </TouchableOpacity>
 
                         <TouchableOpacity 
@@ -62,7 +73,7 @@ const styles = StyleSheet.create({
     },
     screenTitle: {
         fontSize: 30,
-        alignSelf: 'center',
+        textAlign: 'center',
         marginTop: 20,
         marginBottom: 30,
     },

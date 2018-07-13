@@ -64,9 +64,7 @@ class StartQuiz extends Component {
 
         if(questions.length === 0){ //there is no cards inside deck
             return (
-                <View>
-                    <Text> There is no cards inside this deck. Please insert some card to make quiz</Text>
-                </View>
+                <ShowResult score={score} total={questions.length} />
             )
         }
 
