@@ -35,6 +35,7 @@ class NewDeck extends Component {
             const deck = {
                 title: input,
                 questions: [],
+                createdAt: new Date(),
             }
 
             const keyTitle = input.split(' ').join(''); //taking out the spaces to store key without'em
