@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View, TouchableOpacity, StyleSheet, Platform } from 'react-native'
 import { purple, orange, white } from '../utils/colors';
+import { deleteDeck } from '../utils/asyncDB'
 
 import Deck from './Deck'
 
@@ -67,6 +68,17 @@ class DeckDetail extends Component {
                     }) }       
                 >
                     <Text style={styles.startQuizButtonText} > Start Quiz </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity 
+                    style={styles.buttons} 
+                    onPress={ () => {
+
+                        deleteDeck( singleDeck.title.split(' ').join('') )
+                        this.props.navigation.navigate('DeckList')
+                    } }       
+                >
+                    <Text style={styles.startQuizButtonText} > Delete Deck </Text>
                 </TouchableOpacity>
             </View>
         )

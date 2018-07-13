@@ -49,18 +49,13 @@ export const addCardToDeck = (deckTitle, card) => {
 }
 
 
-//     return AsyncStorage.getItem(FLASHCARDS_DECKS_KEY)
-//         .then( (results) => {
-//             const allDecks = JSON.parse(results);
-//             const deck = allDecks[key];
-//             // console.log('addCardToDeck- BEFORE', deck.questions)
-//             deck.questions.push(card)
-//             // console.log('addCardToDeck', deck.questions)
-//             // console.log('allDecks', allDecks)
+export const deleteDeck = async (deckTitle) => {
+    const allDecks = await getDecks();
+    console.log('allDecksBefore', allDecks)
+    allDecks[deckTitle] = undefined;
+    delete allDecks[deckTitle];
+    console.log('allDecksAfter', allDecks)
+    await AsyncStorage.setItem(FLASHCARDS_DECKS_KEY, JSON.stringify(allDecks));
 
-//             AsyncStorage.setItem(FLASHCARDS_DECKS_KEY, JSON.stringify(allDecks)); //updating 
-
-//         })
-        
-// }
+}
 
