@@ -62,15 +62,17 @@ class StartQuiz extends Component {
         const { questions } = this.props.navigation.state.params.deck;
         const { currentIndex, isQuestion, score } = this.state;
 
-        if(questions.length === 0){
-            return <ShowResult />
-        }
-
-        if(currentIndex >= questions.length){
+        if(questions.length === 0){ //there is no cards inside deck
             return (
                 <View>
-                    <Text> SHOW SCORE AND RESET State</Text>
+                    <Text> There is no cards inside this deck. Please insert some card to make quiz</Text>
                 </View>
+            )
+        }
+
+        if(currentIndex >= questions.length){ //show results
+            return (
+                <ShowResult score={score} total={questions.length} />
             )
         }
 
