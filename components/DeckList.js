@@ -7,7 +7,7 @@ import { getDecks } from '../utils/asyncDB'
 //redux stuff
 import { connect } from 'react-redux'
 import { retrieveDecks } from '../actions'
-import { lightBlue } from '../utils/colors';
+import { lightBlue, white } from '../utils/colors';
 
 
 //############## Scrollable Header Constants ##############
@@ -32,6 +32,9 @@ class DeckList extends Component { //DeckList is the main screen (initial route)
     state = {
         isLoading: false, //data is not ready yet to be displayed
         scrollY: new Animated.Value(0),
+        // scrollY: new Animated.Value(
+        //     // iOS has negative initial scroll value because content inset...
+        //     Platform.OS === 'ios' ? -HEADER_MAX_HEIGHT : 0 ),
 
     }
 
@@ -106,8 +109,8 @@ class DeckList extends Component { //DeckList is the main screen (initial route)
                                         y: scrollY,
                                     }
                                 }
-                            }
-                        ]
+                            },
+                        ],
                     )}
                 
                 >
@@ -221,19 +224,26 @@ const styles = StyleSheet.create({
     },
     bar: {
         // flexDirection: 'row',
-        marginTop: 28,
+        backgroundColor: 'transparent',
+        marginTop: Platform.OS === 'ios' ? 28 : 38,
         height: 32,
         alignItems: 'center',
         justifyContent: 'center',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
     },
     title: {
         // flex: 1,
         backgroundColor: 'transparent',
-        color: 'white',
+        color: white,
         fontSize: 18,
     },
     scrollViewContent: {
-        marginTop: HEADER_MAX_HEIGHT, 
+        marginTop: HEADER_MAX_HEIGHT,
+        // iOS uses content inset, which acts like padding.
+        // paddingTop: Platform.OS !== 'ios' ? HEADER_MAX_HEIGHT : 0, 
     },
     backgroundImage: {
         position: 'absolute',
