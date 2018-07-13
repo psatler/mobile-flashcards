@@ -51,8 +51,8 @@ export default class FlipCardAnimation extends Component {
     }
 
     render() {
-        const { animatedValue, listenerValue } = this.state;
-        const { showFront } = this.props;
+        const { animatedValue } = this.state;
+        const { showFront } = this.props; //it has the same value as the isQuestion state var from StartQuiz component
         // console.log('isQuestion', showFront)
 
         const frontAnimatedStyle = {
@@ -87,24 +87,25 @@ export default class FlipCardAnimation extends Component {
         
         return (
 
-            <View >
-                <View style={styles.container} >
+            <View style={styles.container} >
+
+                    {/* <View style={{flex: 0.5}}></View> */}
+
                     {showFront === true ? (
                     <Animated.View style={[styles.flipCard, frontAnimatedStyle]}>
                         <Text style={styles.flipText}>
-                        {/* This text is flipping on the front. */}
                             {this.props.questionText}
                         </Text>
                     </Animated.View>
                     ) : (
                     <Animated.View style={[backAnimatedStyle, styles.flipCard, styles.flipCardBack]}>
                         <Text style={styles.flipText}>
-                        {/* This text is flipping on the back. */}
                             {this.props.answerText}
                         </Text>
                     </Animated.View>
                     )}
-                </View>
+               
+                {/* <View style={{flex: 0.5}}></View> */}
 
                 {/* <TouchableOpacity 
                     onPress={() => this.flipCard()}
@@ -120,13 +121,10 @@ export default class FlipCardAnimation extends Component {
 const {width, height} = Dimensions.get('window');
 const styles = StyleSheet.create({
     container: {
-        // flex: 1, //to make it fill the majority of the space available
-        // alignItems: 'center',
-        // justifyContent: 'center',
-        
+        flex: 1, //to make it fill the majority of the space available
     },
     flipCard: {
-        // flex: 1,
+        flex: 1,
         margin: 5,
         borderWidth: 1,
         padding: 5,
