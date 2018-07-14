@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, TouchableOpacity, StyleSheet, Platform, Button, Alert } from 'react-native'
+import { Text, View, TouchableOpacity, StyleSheet, Platform, Alert } from 'react-native'
 import { purple, orange, white, red } from '../utils/colors';
 import { deleteDeck } from '../utils/asyncDB'
 
@@ -23,11 +23,21 @@ class DeckDetail extends Component {
         return {
             title: deckTitle, //from nav params (above)
             headerRight: (
-                <Button
-                  onPress={() => params.handleRemove(deckTitle)}
-                  title="Delete"
-                  color={white}
-                />
+                <TouchableOpacity
+                    onPress={() => params.handleRemove(deckTitle)}
+                >
+                   <Text style={{
+                       fontSize: 15,
+                       color: white,
+                       marginRight: 5,
+                   }}> Delete </Text> 
+
+                </TouchableOpacity>
+                // <Button
+                //   onPress={() => params.handleRemove(deckTitle)}
+                //   title="Delete"
+                //   color={white}
+                // />
               ),
             headerStyle: { //style object wrapping the header
                 backgroundColor: purple,
