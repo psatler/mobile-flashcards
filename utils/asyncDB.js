@@ -3,8 +3,7 @@ import { data } from './mockData'
 const FLASHCARDS_DECKS_KEY = 'Flashcards:decks'
 
 const setInitialData = async () => {
-    let obj = data;
-
+    let obj = data; 
     await AsyncStorage.setItem(FLASHCARDS_DECKS_KEY, JSON.stringify(obj))
 }
 
@@ -16,7 +15,6 @@ export const getDecks = async () => {
             let parsedObj = JSON.parse(value); //parsing back to object
             return parsedObj;
         } else { //if not, we set initial state
-            // console.log('setting initial state');
             // setInitialData(); //defined above
             return {} 
         }
@@ -28,11 +26,11 @@ export const getDecks = async () => {
 export const saveDeckTitle = (keyTitle, deckObj) => {
     try {
         return AsyncStorage.mergeItem(FLASHCARDS_DECKS_KEY, JSON.stringify({
-            [keyTitle]: deckObj
+            [keyTitle]: deckObj //properties of deckObj are defined in submitDeck method inside NewDeck.js file
         }))
         
     } catch (err) {
-        console.log(err);
+        console.log('There was an error creating a new deck: ',err);
     }
 }
 
@@ -51,11 +49,13 @@ export const addCardToDeck = (deckTitle, card) => {
 
 export const deleteDeck = async (deckTitle) => {
     const allDecks = await getDecks();
-    console.log('allDecksBefore', allDecks)
     allDecks[deckTitle] = undefined;
     delete allDecks[deckTitle];
-    console.log('allDecksAfter', allDecks)
     await AsyncStorage.setItem(FLASHCARDS_DECKS_KEY, JSON.stringify(allDecks));
+}
 
+export const deleteAllDecks = async () => {
+    const empty = {}
+    await AsyncStorage.setItem(FLASHCARDS_DECKS_KEY, JSON.stringify(empty))
 }
 

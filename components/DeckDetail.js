@@ -1,19 +1,33 @@
 import React, { Component } from 'react'
-import { Text, View, TouchableOpacity, StyleSheet, Platform } from 'react-native'
-import { purple, orange, white } from '../utils/colors';
+import { Text, View, TouchableOpacity, StyleSheet, Platform, Button } from 'react-native'
+import { purple, orange, white, red } from '../utils/colors';
 import { deleteDeck } from '../utils/asyncDB'
 
 import Deck from './Deck'
 
 import { connect } from 'react-redux'
+import { removeDeck } from '../actions'
 
 class DeckDetail extends Component {
+    componentDidMount(){
+        //setting this so we can ref the method inside the nav options, being able 
+        this.props.navigation.setParams({ handleRemove: this.removeDeck })
+    }
+
     //dinamically setting specific options for the Stack Navigator
     static navigationOptions = ({ navigation }) => {
+        const { params = {} } = navigation.state
         const { deckTitle } = navigation.state.params;
 
         return {
             title: deckTitle, //from nav params (above)
+            headerRight: (
+                <Button
+                  onPress={() => params.handleRemove(deckTitle)} //
+                  title="Delete"
+                  color={white}
+                />
+              ),
             headerStyle: { //style object wrapping the header
                 backgroundColor: purple,
             },
@@ -25,6 +39,7 @@ class DeckDetail extends Component {
         }
     }
 
+    //TODO: make this filter on mapStateToProps
     filterDeck = (deckTitle) => {
         const key = deckTitle.split(' ').join('');
         const { decks } = this.props;
@@ -33,25 +48,42 @@ class DeckDetail extends Component {
         return deck;
     }
 
+    removeDeck = (deckTitle) => {
+        const key = deckTitle.split(' ').join('');
+
+        //update redux
+        this.props.dispatch(removeDeck(key))
+
+        //delete from DB
+        deleteDeck( key )
+
+        //go to main page
+        this.props.navigation.navigate('DeckList')
+        // this.props.navigation.goBack();
+    }
+
     render() {
         const { navigation } = this.props;
         //getting parameters from nav
         const deckTitle = navigation.getParam('deckTitle', 'defaultTitle');
-        // const deckLength = navigation.getParam('deckLength', '0');
-
-        // console.log('this.state.deckReducer',this.props.decks)
 
         const singleDeck = this.filterDeck(deckTitle);
 
-        // const { singleDeck } = this.state.singleDeck
+        // console.log('singleDeck', singleDeck)
+  
+        if(singleDeck === undefined){ //after removing a deck, before going back to main screen, this Component was rendering again, but this time "singleDeck" object is undefined (since it was removed). Therefore, it was causing an error of "Undefined is not an object (evaluating 'singleDeck.title)"
+            return (<View></View>)
+        }
 
         return (
             <View style={styles.container} >
+                {/* {console.log('BOSTA ###### GRANDE 1')} */}
+
                 <Deck 
                     deckName={singleDeck.title}
                     deckSize={singleDeck.questions.length}
                 />
-
+                {/* {console.log('BOSTA ###### GRANDE 2')} */}
                 <TouchableOpacity 
                     style={styles.buttons} 
                     onPress={ () => this.props.navigation.navigate('NewCard', {
@@ -70,16 +102,12 @@ class DeckDetail extends Component {
                     <Text style={styles.startQuizButtonText} > Start Quiz </Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity 
+                {/* <TouchableOpacity 
                     style={styles.buttons} 
-                    onPress={ () => {
-
-                        deleteDeck( singleDeck.title.split(' ').join('') )
-                        this.props.navigation.navigate('DeckList')
-                    } }       
+                    onPress={ () => this.removeDeck(deckTitle)}       
                 >
                     <Text style={styles.startQuizButtonText} > Delete Deck </Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
             </View>
         )
     }

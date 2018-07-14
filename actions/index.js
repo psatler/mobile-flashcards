@@ -2,6 +2,8 @@
 export const RETRIEVE_DECKS = 'RETRIEVE_DECKS'
 export const ADD_DECK = 'ADD_DECK'
 export const ADD_CARD = 'ADD_CARD'
+export const REMOVE_DECK = 'REMOVE_DECK'
+export const REMOVE_ALL_DECKS = 'REMOVE_ALL_DECKS'
 
 
 
@@ -27,3 +29,17 @@ export const addCard = (title, card) => {
         title,
     }
 }
+
+export const removeDeck = (key) => {
+    return {
+        type: REMOVE_DECK,
+        payload: key,
+    }
+}
+
+export const removeAllDecks = () => {
+    return {
+        type: REMOVE_ALL_DECKS,
+    }
+}
+
