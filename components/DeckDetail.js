@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, TouchableOpacity, StyleSheet, Platform, Button } from 'react-native'
+import { Text, View, TouchableOpacity, StyleSheet, Platform, Button, Alert } from 'react-native'
 import { purple, orange, white, red } from '../utils/colors';
 import { deleteDeck } from '../utils/asyncDB'
 
@@ -11,7 +11,8 @@ import { removeDeck } from '../actions'
 class DeckDetail extends Component {
     componentDidMount(){
         //setting this so we can ref the method inside the nav options, being able 
-        this.props.navigation.setParams({ handleRemove: this.removeDeck })
+        // this.props.navigation.setParams({ handleRemove: this.removeDeck })
+        this.props.navigation.setParams({ handleRemove: this.showDeleteConfirmation })
     }
 
     //dinamically setting specific options for the Stack Navigator
@@ -23,7 +24,7 @@ class DeckDetail extends Component {
             title: deckTitle, //from nav params (above)
             headerRight: (
                 <Button
-                  onPress={() => params.handleRemove(deckTitle)} //
+                  onPress={() => params.handleRemove(deckTitle)}
                   title="Delete"
                   color={white}
                 />
@@ -37,6 +38,19 @@ class DeckDetail extends Component {
                 color: white,
             }
         }
+    }
+
+    showDeleteConfirmation = (deckTitle) => {
+        Alert.alert(
+            'Delete Deck',
+            'Do you really want to delete this deck?',
+            [
+            //   {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
+              {text: 'Cancel', onPress: () => {}, style: 'cancel'},
+              {text: 'OK', onPress: () => this.removeDeck(deckTitle)},
+            ],
+            { cancelable: false }
+          )
     }
 
     //TODO: make this filter on mapStateToProps
