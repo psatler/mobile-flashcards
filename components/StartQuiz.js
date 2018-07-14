@@ -1,11 +1,18 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, TouchableOpacity, Platform } from 'react-native'
+import { Text, View, StyleSheet, 
+        TouchableOpacity, 
+        Platform,
+
+    } from 'react-native'
 
 import { connect } from 'react-redux'
-import { white, red, green, blue, gray } from '../utils/colors';
+import { white, red, green, blue, gray, lightBlue } from '../utils/colors';
 
 import ShowResult from './ShowResult'
 import FlipCardAnimation from '../utils/flipCardAnimation'
+
+// import ProgressBar from 'react-native-progress/Bar'
+import * as Progress from 'react-native-progress';
 
 class StartQuiz extends Component {
 
@@ -76,7 +83,25 @@ class StartQuiz extends Component {
 
         return (
             <View style={styles.container} >
-                <Text style={styles.scoreText} > Question: {currentIndex + 1} / {questions.length} </Text>
+                <View style={styles.scoreContainer}>
+                    <Text style={styles.scoreText} > {currentIndex + 1} / {questions.length} </Text>
+
+                    <View style={ {flex: 2}} >
+                        <Progress.Bar 
+                            style={ { marginTop: 10, }}
+                            progress={ (currentIndex+1)/questions.length } 
+                            width={null}
+                            // height={25}
+                            color={lightBlue}
+                            borderWidth={1}
+                            // unfilledColor={white}
+                        />
+                    </View>
+
+                    
+                    
+                </View>
+                
 
                 <View style={styles.cardContainer}>
                     <FlipCardAnimation 
@@ -137,7 +162,16 @@ const styles = StyleSheet.create({
         flex: 1,
         // justifyContent: 'space-between'
     },
+    scoreContainer: {
+        // flex: 1,
+        flexDirection: 'row',
+        marginLeft: 10, 
+        marginRight: 10, 
+        marginTop: 5, 
+        // backgroundColor: 'pink'
+    },
     scoreText: {
+        flex: 0.5,
         marginTop: 5,
         fontSize: 15,
         fontWeight: 'bold',
@@ -150,9 +184,9 @@ const styles = StyleSheet.create({
         flex: 1, //to make it fill the majority of the space available
         margin: 5,
         marginBottom: 25,
-        borderWidth: 1,
-        borderColor: 'black',
-        borderRadius: Platform.OS === 'ios' ? 16 : 2,
+        // borderWidth: 1,
+        // borderColor: 'black',
+        // borderRadius: Platform.OS === 'ios' ? 16 : 2,
         // backgroundColor: white,
     },
     switchButton: {
