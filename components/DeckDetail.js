@@ -53,14 +53,6 @@ class DeckDetail extends Component {
           )
     }
 
-    //TODO: make this filter on mapStateToProps
-    filterDeck = (deckTitle) => {
-        const key = deckTitle.split(' ').join('');
-        const { decks } = this.props;
-        const deck = decks[key];
-
-        return deck;
-    }
 
     removeDeck = (deckTitle) => {
         const key = deckTitle.split(' ').join('');
@@ -77,11 +69,8 @@ class DeckDetail extends Component {
     }
 
     render() {
-        const { navigation } = this.props;
-        //getting parameters from nav
-        const deckTitle = navigation.getParam('deckTitle', 'defaultTitle');
-
-        const singleDeck = this.filterDeck(deckTitle);
+        
+        const singleDeck = this.props.deck; //deck filtered in mapStateToProps
 
         // console.log('singleDeck', singleDeck)
   
@@ -91,13 +80,12 @@ class DeckDetail extends Component {
 
         return (
             <View style={styles.container} >
-                {/* {console.log('BOSTA ###### GRANDE 1')} */}
 
                 <Deck 
                     deckName={singleDeck.title}
                     deckSize={singleDeck.questions.length}
                 />
-                {/* {console.log('BOSTA ###### GRANDE 2')} */}
+
                 <TouchableOpacity 
                     style={styles.buttons} 
                     onPress={ () => this.props.navigation.navigate('NewCard', {
@@ -116,20 +104,20 @@ class DeckDetail extends Component {
                     <Text style={styles.startQuizButtonText} > Start Quiz </Text>
                 </TouchableOpacity>
 
-                {/* <TouchableOpacity 
-                    style={styles.buttons} 
-                    onPress={ () => this.removeDeck(deckTitle)}       
-                >
-                    <Text style={styles.startQuizButtonText} > Delete Deck </Text>
-                </TouchableOpacity> */}
+                
             </View>
         )
     }
 }
 
-const mapStateToProps = (state) => {
+
+
+const mapStateToProps = (state, { navigation }) => { //passing the state and the current props
+    // const deckTitle = navigation.getParam('deckTitle', 'defaultTitle');
+    const { deckTitle } = navigation.state.params;
+    const key = deckTitle.split(' ').join('');
     return {
-        decks: state.deckReducer,
+        deck: state.deckReducer[key],
     }
 }
 
