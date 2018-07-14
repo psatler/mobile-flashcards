@@ -76,21 +76,7 @@ class StartQuiz extends Component {
 
         return (
             <View style={styles.container} >
-                <Text> Question: {currentIndex + 1} / {questions.length} </Text>
-
-                {/* <View style={styles.cardContainer}>
-
-                {isQuestion === true ? ( //explicitly making the comparison for legibility sake
-                    <View>
-                        <Text style={styles.questionAnswer} > {questions[currentIndex].question} </Text>
-                    </View>
-                 ) : (
-                    <View>
-                        <Text style={styles.questionAnswer} > {questions[currentIndex].answer} </Text>
-                    </View>
-                 ) }
-
-                </View> */}
+                <Text style={styles.scoreText} > Question: {currentIndex + 1} / {questions.length} </Text>
 
                 <View style={styles.cardContainer}>
                     <FlipCardAnimation 
@@ -150,6 +136,11 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         // justifyContent: 'space-between'
+    },
+    scoreText: {
+        marginTop: 5,
+        fontSize: 15,
+        fontWeight: 'bold',
     },
     questionAnswer: {
         textAlign: 'center',
