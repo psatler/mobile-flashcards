@@ -26,16 +26,11 @@ class DeckList extends Component { //DeckList is the main screen (initial route)
                 this.setState({ isLoading: true })
             }
         )
-        //update redux
     }
 
     state = {
         isLoading: false, //data is not ready yet to be displayed
         scrollY: new Animated.Value(0),
-        // scrollY: new Animated.Value(
-        //     // iOS has negative initial scroll value because content inset...
-        //     Platform.OS === 'ios' ? -HEADER_MAX_HEIGHT : 0 ),
-
     }
 
     showDeleteConfirmation = () => {
@@ -43,7 +38,6 @@ class DeckList extends Component { //DeckList is the main screen (initial route)
             'Delete All Decks',
             'Do you really want to delete the whole list of decks?',
             [
-            //   {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
               {text: 'Cancel', onPress: () => {}, style: 'cancel'},
               {text: 'OK', onPress: () => this.removeDeck()},
             ],
@@ -58,10 +52,6 @@ class DeckList extends Component { //DeckList is the main screen (initial route)
 
         //delete from DB
         deleteAllDecks()
-
-        //go to main page
-        // this.props.navigation.navigate('DeckList')
-        // this.props.navigation.goBack();
     }
 
     
@@ -70,16 +60,14 @@ class DeckList extends Component { //DeckList is the main screen (initial route)
         const { isLoading, scrollY } = this.state;
         const { decks } = this.props; // decks come from mapStateToProps
 
-        // console.log('object keys ',Object.keys(decks))
-
-        // #### for header animation ####
+        // #### interpolations for header animation ####
         const headerHeight = scrollY.interpolate( { //this is used below so the height changes as the user scrolls
             inputRange: [0, HEADER_SCROLL_DISTANCE],
             outputRange: [HEADER_MAX_HEIGHT, HEADER_MIN_HEIGHT],
             extrapolate: 'clamp',
         });
 
-        // #### for header background animation (image) ####
+        // #### interpolations for header background animation (image) ####
         const imageOpacity = scrollY.interpolate( {
             inputRange: [0, HEADER_SCROLL_DISTANCE/2, HEADER_SCROLL_DISTANCE],
             outputRange: [1, 1, 0], //opacity decays after the header has been halfway scrolled (because of the 3rd break point)
@@ -91,24 +79,12 @@ class DeckList extends Component { //DeckList is the main screen (initial route)
             extrapolate: 'clamp',
         })
 
-        // for header title
+        // interpolations for header title
         const titleScale = scrollY.interpolate({
             inputRange: [0, HEADER_SCROLL_DISTANCE / 2, HEADER_SCROLL_DISTANCE],
             outputRange: [0, 0, 1],
             extrapolate: 'clamp',
         });
-        const titleTranslate = scrollY.interpolate({
-            inputRange: [0, HEADER_SCROLL_DISTANCE / 2, HEADER_SCROLL_DISTANCE],
-            outputRange: [0, 0, 0],
-            extrapolate: 'clamp',
-        });
-
-        // const iconScale = scrollY.interpolate({
-        //     inputRange: [0, HEADER_SCROLL_DISTANCE / 2, HEADER_SCROLL_DISTANCE],
-        //     outputRange: [0, 0, 1],
-        //     extrapolate: 'clamp',
-        // });
-
         
         if(!isLoading){
             return (
@@ -119,15 +95,13 @@ class DeckList extends Component { //DeckList is the main screen (initial route)
             )
         }
 
-        // data is from the mockData array
         return (
             <View style={ {flex: 1} } >
 
                 <ScrollView 
                     style={styles.container} 
-                    //adding properties below to trigger animation
                     scrollEventThrottle={16}
-                    onScroll={ Animated.event(
+                    onScroll={ Animated.event( //adding properties below to trigger animation on the y axis
                         [ 
                             {
                                 nativeEvent: {
@@ -144,7 +118,6 @@ class DeckList extends Component { //DeckList is the main screen (initial route)
 
                         {Object.keys(decks).map( (key) => {
                             const { title, questions, image } = decks[key];
-                            // console.log('image: ', image)
                             
                             return (
                                 <TouchableOpacity
@@ -193,36 +166,15 @@ class DeckList extends Component { //DeckList is the main screen (initial route)
 
 
                     <Animated.View style={styles.bar} >
-                        {/* <View style={ {flex: 1, }} ></View> */}
-
                         <Animated.Text style={[
                             styles.title, 
                             {
-                                transform: [ { scale: titleScale }, 
-                                    // { translateY: titleTranslate,} 
-                                ]
+                                transform: [ { scale: titleScale }, ]
                             }
                             ]}
                         >
                             Home
                         </Animated.Text>
-
-                        {/* <Animated.View style={[
-                            styles.headerIcon,
-                            {
-                                transform: [
-                                    { scale: iconScale, }
-                                ]
-                            }
-                        ]}>
-                            <TouchableOpacity>
-                                <MaterialIcons name='settings' size={30}  />
-                            </TouchableOpacity>
-
-                        </Animated.View> */}
-
-                        
-
                     </Animated.View>
 
                     <View style={styles.headerIcon} >
@@ -261,8 +213,6 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
     },
     bar: {
-        // flex: 1,
-        // flexDirection: 'row',
         backgroundColor: 'transparent',
         marginTop: Platform.OS === 'ios' ? 28 : 38,
         height: 32,
@@ -274,15 +224,12 @@ const styles = StyleSheet.create({
         right: 0,
     },
     title: {
-        // flex: 1,
         backgroundColor: 'transparent',
         color: white,
         fontSize: 18,
     },
     scrollViewContent: {
-        marginTop: HEADER_MAX_HEIGHT,
-        // iOS uses content inset, which acts like padding.
-        // paddingTop: Platform.OS !== 'ios' ? HEADER_MAX_HEIGHT : 0, 
+        marginTop: HEADER_MAX_HEIGHT, 
     },
     backgroundImage: {
         position: 'absolute',
@@ -294,7 +241,6 @@ const styles = StyleSheet.create({
         resizeMode: 'cover',
     },
     headerIcon: {
-        // flex: 1,
         alignSelf: 'flex-end',
         top: 10,
         right: 10,
