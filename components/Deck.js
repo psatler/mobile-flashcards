@@ -4,7 +4,6 @@ import { lightPurp, white, purple, lightBlue, red } from '../utils/colors';
 import { Entypo } from '@expo/vector-icons'
 
 const AVATAR_IMAGE_HEIGHT = 40
-// const AVATAR_IMAGE_WIDTH = 40
 
 const Deck = (props) => {
     return (
@@ -20,9 +19,9 @@ const Deck = (props) => {
                 <Text style={deckTitle} >{props.deckName}</Text>
                 <Text style={deckSize} >{props.deckSize} cards</Text>
             </View>
-            <View style={ styles.removeButton} >
+            {/* <View style={ styles.removeButton} >
                 <Entypo name='dots-three-vertical' size={30}  />
-            </View>
+            </View> */}
         </View>
     )
 }
@@ -41,7 +40,6 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         minHeight: 80,
         // backgroundColor: white,
-        // alignItems: 'center',
     },
     image: {
         flex: 1,
@@ -50,27 +48,21 @@ const styles = StyleSheet.create({
     },
     avatar: {
         flex: 0.5,
-        // backgroundColor: purple,
-        // height: AVATAR_IMAGE_HEIGHT,
-        // width: AVATAR_IMAGE_HEIGHT,
         borderRadius: AVATAR_IMAGE_HEIGHT/2, 
         borderColor: lightBlue,
         borderWidth: 1,
         overflow: 'hidden'
-
     },
     deckInfo: {
         flex: 2,
         alignItems: 'center',
     },
     deckTitle: {
-        // color: white,
         fontWeight: 'bold',
         fontSize: 20,
     },
     deckSize: {
         marginTop: 10,
-        // color: white,
         fontWeight: 'bold',
         fontSize: 15,
     }, 
