@@ -15,8 +15,8 @@ export const getDecks = async () => {
             let parsedObj = JSON.parse(value); //parsing back to object
             return parsedObj;
         } else { //if not, we set initial state
-            // setInitialData(); //defined above
-            return {} 
+            setInitialData(); //defined above
+            // return {} 
         }
     } catch (err) {
         console.log('There was an error retrieving decks from local DB: ', err);
@@ -37,11 +37,12 @@ export const saveDeckTitle = (keyTitle, deckObj) => {
 export const addCardToDeck = (deckTitle, card) => {
     const key = deckTitle;
 
-    return getDecks().then( (allDecks) => { //it comes parsed to json already
-        const deck = allDecks[key];
-        deck.questions.push(card);
+    return getDecks()
+        .then( (allDecks) => { //it comes parsed to json already
+            const deck = allDecks[key];
+            deck.questions.push(card);
 
-        AsyncStorage.setItem(FLASHCARDS_DECKS_KEY, JSON.stringify(allDecks)); //updating 
+            AsyncStorage.setItem(FLASHCARDS_DECKS_KEY, JSON.stringify(allDecks)); //updating 
 
     })
 }
