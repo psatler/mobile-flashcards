@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, TextInput, 
-    Platform, TouchableOpacity, KeyboardAvoidingView, Dimensions, ImageEditor } from 'react-native'
-import { gray, white } from '../utils/colors';
+import { Text, StyleSheet, TextInput, 
+    Platform, TouchableOpacity, KeyboardAvoidingView, Dimensions } from 'react-native'
+import { lightBlue, darkBlue } from '../utils/colors';
 
 import { saveDeckTitle } from '../utils/asyncDB'
 import { connect } from 'react-redux'
@@ -21,13 +21,6 @@ class NewDeck extends Component {
         this.setState({
             input: deckTitle,
         })
-    }
-
-    toHome = () => {
-        this.props.navigation.navigate('DeckList')
-        // this.props.navigation.dispatch(NavigationActions.back({
-        //     key: 'DeckList',
-        // }))
     }
 
     submitDeck = () => {
@@ -52,18 +45,15 @@ class NewDeck extends Component {
             })
 
             //go back to home
-            this.toHome(); //which is DeckList component
+            this.props.navigation.navigate('DeckList')
 
             //save to DB (async storage)
             saveDeckTitle(keyTitle, deck);
         }
-
-        // alert('This was the input: ' + input);
     }
 
     askPermission = async () => {
         let res = await Permissions.askAsync(Permissions.CAMERA_ROLL)
-        // console.log("Ask Permission Result: ", res)
         if(res.status === 'granted'){
             return this.pickImage()
         }
@@ -79,20 +69,8 @@ class NewDeck extends Component {
             return
         }
         else {
-            // ImageEditor.cropImage(result.uri, {
-            //     offset: { x: 0, y: 0 },
-            //     size: { width: result.width, height: result.height },
-            //     displaySize: { width: 200, height: 100 },
-            //     resizeMode: 'contain',
-            // },
-            // (uri) => this.setState({ image: uri }), //passing the modified URI 
-            // () => console.log("Error cropping image") 
-            // )
-
             this.setState({ image: result.uri });
         }
-
-
     }
 
     render() {
@@ -132,28 +110,26 @@ const styles = StyleSheet.create({
     headline: {
         textAlign: 'center',
         fontSize: 40,
-        // marginTop: 15,
+        color: lightBlue,
     },
     textInputStyle: {
-        // flex: 1,
         paddingLeft: 15,
         marginTop: 30,
         height: 50,
-        borderColor: gray,
+        borderColor: lightBlue,
         borderWidth: 1,
         borderRadius: Platform.OS === 'ios' ? 16 : 2,
         width: window.width - 30,
     },
     submitButton: {
-        // alignItems: 'center',
         marginTop: 25,
         padding: 10,
         borderRadius: Platform.OS === 'ios' ? 16 : 2,
-        backgroundColor: 'black',
+        backgroundColor: darkBlue,
     },
     submitButtonText: {
         fontSize: 15,
-        color: white,
+        color: lightBlue,
         padding: 5,
     }
 });
