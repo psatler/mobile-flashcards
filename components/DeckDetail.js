@@ -82,7 +82,7 @@ class DeckDetail extends Component {
         
         const singleDeck = this.props.deck; //deck filtered in mapStateToProps
 
-        // console.log('singleDeck', singleDeck)
+        console.log('singleDeck', singleDeck)
   
         if(singleDeck === undefined){ //after removing a deck, before going back to main screen, this Component was rendering again, but this time "singleDeck" object is undefined (since it was removed). Therefore, it was causing an error of "Undefined is not an object (evaluating 'singleDeck.title)"
             return (<View></View>)

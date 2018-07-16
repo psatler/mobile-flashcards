@@ -30,6 +30,8 @@ const deckReducer = (state = deckInit, action) => {
             // console.log('state', state)
             const title = state[key].title; //title without space modification
             const deckQuestions = state[key].questions.concat(newQuestion);
+            const imageURI = state[key].image;
+            const dataOfCreation = state[key].createdAt;
             // deck.questions.concat(newQuestion);
             
             return {
@@ -37,6 +39,8 @@ const deckReducer = (state = deckInit, action) => {
                 [key]: {
                     title,
                     questions: deckQuestions,
+                    image: imageURI,
+                    createdAt: dataOfCreation,
                 }
             }
         
