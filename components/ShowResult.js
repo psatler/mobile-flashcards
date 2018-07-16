@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet, Platform, TouchableOpacity } from 'react-native'
 import { Ionicons, EvilIcons } from '@expo/vector-icons'
-import { white } from '../utils/colors';
+import { white, darkBlue, lightBlue } from '../utils/colors';
 import { withNavigation } from 'react-navigation';
 
 class ShowResult extends Component {
@@ -36,8 +36,8 @@ class ShowResult extends Component {
                                 } }
                             onPress={ () => this.props.navigation.goBack()}        
                         >
-                            <EvilIcons name={'redo' } size={50}  />
-                             { total === 0 ? ( <Text> Go Back </Text> ) : ( <Text> Redo Quiz </Text> ) }
+                            <EvilIcons name={'redo' } size={50} color={lightBlue}  />
+                             { total === 0 ? ( <Text style={{color: lightBlue}}> Go Back </Text> ) : ( <Text style={{color: lightBlue}}> Redo Quiz </Text> ) }
                         </TouchableOpacity>
 
                         <TouchableOpacity 
@@ -46,8 +46,8 @@ class ShowResult extends Component {
                                 } }
                             onPress={ () => this.props.navigation.navigate('DeckList')}        
                         >
-                            <Ionicons name={Platform.OS === 'ios' ? 'ios-home' : 'md-home' } size={50}  />
-                            <Text> Home </Text>
+                            <Ionicons name={Platform.OS === 'ios' ? 'ios-home' : 'md-home' } size={50} color={lightBlue}  />
+                            <Text style={{color: lightBlue}}> Home </Text>
                         </TouchableOpacity>
                     </View>
             
@@ -69,17 +69,19 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: 'black',
         borderRadius: Platform.OS === 'ios' ? 16 : 2,
-        backgroundColor: white,
+        backgroundColor: darkBlue,
     },
     screenTitle: {
         fontSize: 30,
         textAlign: 'center',
         marginTop: 20,
         marginBottom: 30,
+        color: lightBlue,
     },
     resultMessage: {
         fontSize: 15,
         textAlign: 'center',
+        color: white,
     },
     buttonsContainer: {
         flexDirection: 'row',
