@@ -1,6 +1,7 @@
 import React from 'react';
+import { Platform } from 'react-native'
 import { createBottomTabNavigator, createStackNavigator } from 'react-navigation'
-import { Ionicons } from '@expo/vector-icons'
+import { MaterialCommunityIcons, Entypo } from '@expo/vector-icons'
 
 // screens
 import DeckList from './DeckList'
@@ -18,19 +19,35 @@ const Tabs = createBottomTabNavigator(
         screen: DeckList,
         navigationOptions: {
             tabBarLabel: 'Decks',
-            tabBarIcon: ({ tintColor}) => <Ionicons name='ios-bookmarks' size={30} color={tintColor} />
+            tabBarIcon: ({ tintColor}) => <MaterialCommunityIcons name='cards' size={30} color={tintColor} />
         }
     },
     NewDeck: {
         screen: NewDeck,
         navigationOptions: {
             tabBarLabel: 'Add a New Deck',
-            tabBarIcon: ({ tintColor}) => <Ionicons name='ios-bookmarks' size={30} color={tintColor} />
+            tabBarIcon: ({ tintColor}) => <Entypo name='plus' size={30} color={tintColor} />
         }
     }
 },
 {
-    //TODO: put some styles on navigation options
+    navigationOptions: {
+        header: null,
+      },
+    tabBarOptions: {
+        activeTintColor: Platform.OS === 'ios' ? lightBlue : white,
+        style: {
+            height: 56,
+            backgroundColor: Platform.OS === 'ios' ? white : lightBlue,
+            shadowColor: 'rgba(0,0,0,0.24)',
+            shadowOffset: {
+            width: 0,
+            height: 3,
+            },
+            shadowRadius: 6,
+            shadowOpacity: 1,
+        }
+    }
 })
 
 
