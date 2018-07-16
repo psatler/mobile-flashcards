@@ -7,7 +7,7 @@ import store from './store'
 import { setLocalNotification } from './utils/localNotifications'
 import MainNavigator from './components/NavigationTabs'
 import CustomStatusBar from './components/CustomStatusBar'
-import { purple } from './utils/colors';
+import { lightBlue } from './utils/colors';
 
 
 
@@ -22,12 +22,10 @@ export default class App extends React.Component {
     return (
       <Provider store={store} >
         <View style={styles.container}>
-          <CustomStatusBar backgroundColor={purple} barStyle='light-content' />
+        
+          <CustomStatusBar backgroundColor={lightBlue} barStyle='light-content' />
           <MainNavigator />
 
-          {/* <Text>Opening up App.js to start working on your app!</Text>
-          <Text>Changes you make will automatically reload.</Text>
-          <Text>Shake your phone to open the developer menu.</Text> */}
         </View>
       </Provider>
       
