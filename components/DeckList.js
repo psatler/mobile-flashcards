@@ -8,6 +8,7 @@ import { getDecks, deleteAllDecks } from '../utils/asyncDB'
 import { connect } from 'react-redux'
 import { retrieveDecks, removeAllDecks } from '../actions'
 import { lightBlue, white } from '../utils/colors';
+import { AppLoading } from 'expo'
 
 
 //############## Scrollable Header Constants ##############
@@ -86,13 +87,8 @@ class DeckList extends Component { //DeckList is the main screen (initial route)
             extrapolate: 'clamp',
         });
         
-        if(!isLoading){
-            return (
-                // Insert AppLoading Component from Expo here
-                <View>
-                    <Text>Loading</Text> 
-                </View>
-            )
+        if(!isLoading){ //isLoading 
+            return <AppLoading />
         }
 
         return (
