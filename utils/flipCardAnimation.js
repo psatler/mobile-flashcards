@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import {
   StyleSheet,
   Text,
@@ -9,9 +8,7 @@ import {
   Dimensions,
   Animated,
 } from 'react-native';
-import { white, blue } from './colors';
-
-
+import { white, blue, lightBlue, darkBlue } from './colors';
 
 export default class FlipCardAnimation extends Component {
 
@@ -53,7 +50,6 @@ export default class FlipCardAnimation extends Component {
     render() {
         const { animatedValue } = this.state;
         const { showFront } = this.props; //it has the same value as the isQuestion state var from StartQuiz component
-        // console.log('isQuestion', showFront)
 
         const frontAnimatedStyle = {
           transform: [
@@ -63,7 +59,6 @@ export default class FlipCardAnimation extends Component {
               })
             }
           ],
-          //adding opacity so the back face won't be mirrored on Android devices
         //https://github.com/facebook/react-native/issues/1973#issuecomment-262059217
           opacity: animatedValue.interpolate({ //adding this so it won't be mirrored on Android devices
                 inputRange: [89, 90],
@@ -75,7 +70,6 @@ export default class FlipCardAnimation extends Component {
             { rotateY: animatedValue.interpolate({
                 inputRange: [0, 180],
                 outputRange: ['180deg', '360deg'],
-                // outputRange: ['180deg', '0deg']
               }) 
             }
           ],
@@ -88,7 +82,6 @@ export default class FlipCardAnimation extends Component {
         return (
 
             <View style={styles.container} >
-
                     {/* <View style={{flex: 0.5}}></View> */}
 
                     {showFront === true ? (
@@ -128,28 +121,26 @@ const styles = StyleSheet.create({
         margin: 5,
         borderWidth: 1,
         padding: 5,
-        borderColor: 'black',
+        borderColor: darkBlue,
         borderRadius: Platform.OS === 'ios' ? 16 : 2,
-        backgroundColor: 'blue',
+        backgroundColor: lightBlue,
         backfaceVisibility: 'hidden', //it means when the card rotates out of the way, it won't be visible. When it rotates back, it'll be visible again. Not working on Android though, so it was added an workaround for this above
     },
     flipCardBack: {
-        backgroundColor: "red",
-        // position: "absolute",
+        borderColor: lightBlue,
+        borderWidth: 2,
+        backgroundColor: darkBlue,
         top: 0,
     },
     flipText: {
-        // width: 90,
         textAlign: 'center',
-        fontSize: 0.075*width, //workaround to fit on small screens
-        color: 'white',
-        // fontWeight: 'bold',
+        fontSize: 0.075*width, //workaround to fit on small screens taking a percentage of the screen width
+        color: white,
     },
     switchButton: {
         alignSelf: 'center',
         backgroundColor: white,
         padding: 10,
-        // width: 100,
         borderWidth: 1,
         borderColor: blue,
         borderRadius: Platform.OS === 'ios' ? 16 : 2,
