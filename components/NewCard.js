@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View, TouchableOpacity, TextInput, 
     StyleSheet, Dimensions, KeyboardAvoidingView, Platform } from 'react-native'
-import { gray, white } from '../utils/colors';
+import { gray, white, lightBlue, darkBlue } from '../utils/colors';
 import { addCardToDeck } from '../utils/asyncDB'
 
 //redux stuff
@@ -10,12 +10,9 @@ import { addCard } from '../actions'
 
 class NewCard extends Component {
 
-    //TODO: we might have to add a header title here as ADD CARD 
-    static navigationOptions = ({ navigation }) => {
-        // console.log('navigation.state.params', navigation.state)
-        // const { title } = navigation.state.params;
+    static navigationOptions = () => {
         return {
-            title: 'ADD CARD', //from nav params (above)
+            title: 'ADD CARD',
         }
     }
 
@@ -59,12 +56,7 @@ class NewCard extends Component {
         } else {
             alert('Do not let input fields in blank');
         }
-
-        
-
-        // alert('Question: ' + questionInput + '\n\n' + 'Answer: ' + answerInput);
     }
-
 
     render() {
         const { questionInput, answerInput } = this.state;
@@ -80,7 +72,7 @@ class NewCard extends Component {
 
                 <TextInput 
                     value={answerInput}
-                    placeholder={"Insert question's answer"}
+                    placeholder={"Insert an answer"}
                     style={styles.textInputStyle}
                     onChangeText={this.handleAnswerTextChange}
                 />
@@ -100,33 +92,26 @@ const styles = StyleSheet.create({
       flex: 1,
       padding: 10,
       alignItems: 'center',
-    //   justifyContent: 'center',
-    },
-    headline: {
-        textAlign: 'center',
-        fontSize: 40,
-        // marginTop: 15,
     },
     textInputStyle: {
-        // flex: 1,
         paddingLeft: 15,
         marginTop: 20,
         height: 50,
         borderColor: gray,
+        borderColor: lightBlue ,
         borderWidth: 1,
         borderRadius: Platform.OS === 'ios' ? 16 : 2,
         width: window.width - 30,
     },
     submitButton: {
-        // alignItems: 'center',
         marginTop: 25,
         padding: 10,
         borderRadius: Platform.OS === 'ios' ? 16 : 2,
-        backgroundColor: 'black',
+        backgroundColor: darkBlue,
     },
     submitButtonText: {
         fontSize: 15,
-        color: white,
+        color: lightBlue,
         padding: 5,
     }
 });
