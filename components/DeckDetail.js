@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Text, View, TouchableOpacity, StyleSheet, Platform, Alert } from 'react-native'
-import { purple, orange, white, red, lightBlue, darkBlue } from '../utils/colors';
+import { white, lightBlue, darkBlue } from '../utils/colors';
 import { deleteDeck } from '../utils/asyncDB'
 
 import Deck from './Deck'
@@ -133,7 +133,6 @@ const styles = StyleSheet.create({
         margin: 5,
         padding: 10,
         // backgroundColor: lightBlue,
-        
     },
     addCardButtonText: {
         color: white,
