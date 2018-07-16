@@ -117,7 +117,8 @@ class DeckList extends Component { //DeckList is the main screen (initial route)
                     <View style={styles.scrollViewContent} > 
 
                         {Object.keys(decks).map( (key) => {
-                            const { title, questions } = decks[key];
+                            const { title, questions, image } = decks[key];
+                            // console.log('image: ', image)
                             
                             return (
                                 <TouchableOpacity
@@ -131,6 +132,7 @@ class DeckList extends Component { //DeckList is the main screen (initial route)
                                         key={key}
                                         deckName={title}
                                         deckSize={questions.length}
+                                        imageURI={image}
                                     />
                                 </TouchableOpacity>
                                 

@@ -1,18 +1,20 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet, TextInput, 
-    Platform, TouchableOpacity, KeyboardAvoidingView, Dimensions } from 'react-native'
+    Platform, TouchableOpacity, KeyboardAvoidingView, Dimensions, ImageEditor } from 'react-native'
 import { gray, white } from '../utils/colors';
 
 import { saveDeckTitle } from '../utils/asyncDB'
 import { connect } from 'react-redux'
 import { addDeck } from '../actions'
-import { NavigationActions } from 'react-navigation'
+
+import { ImagePicker, Permissions } from 'expo'
 
 class NewDeck extends Component {
 
     //local state for handling form inputs
     state = {
         input: '',
+        image: null, //to store image URI if the user uploads an image
     }
 
     handleTextChange = (deckTitle) => {
@@ -29,11 +31,12 @@ class NewDeck extends Component {
     }
 
     submitDeck = () => {
-        const { input } = this.state;
+        const { input, image } = this.state;
 
         if(input){
             const deck = {
                 title: input,
+                image: image,
                 questions: [],
                 createdAt: new Date(),
             }
@@ -58,6 +61,40 @@ class NewDeck extends Component {
         // alert('This was the input: ' + input);
     }
 
+    askPermission = async () => {
+        let res = await Permissions.askAsync(Permissions.CAMERA_ROLL)
+        // console.log("Ask Permission Result: ", res)
+        if(res.status === 'granted'){
+            return this.pickImage()
+        }
+    }
+
+    pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({ //wait till it resolves
+            allowsEditing: true,
+            aspect: [4, 3],
+        });
+
+        if(result.cancelled){
+            return
+        }
+        else {
+            // ImageEditor.cropImage(result.uri, {
+            //     offset: { x: 0, y: 0 },
+            //     size: { width: result.width, height: result.height },
+            //     displaySize: { width: 200, height: 100 },
+            //     resizeMode: 'contain',
+            // },
+            // (uri) => this.setState({ image: uri }), //passing the modified URI 
+            // () => console.log("Error cropping image") 
+            // )
+
+            this.setState({ image: result.uri });
+        }
+
+
+    }
+
     render() {
         const { input } = this.state;
 
@@ -71,6 +108,10 @@ class NewDeck extends Component {
                     style={styles.textInputStyle}
                     onChangeText={this.handleTextChange}
                 />
+
+                <TouchableOpacity style={styles.submitButton} onPress={this.askPermission}>
+                    <Text style={styles.submitButtonText} > Open Camera Roll </Text>
+                </TouchableOpacity>
 
                 <TouchableOpacity style={styles.submitButton} onPress={this.submitDeck}>
                     <Text style={styles.submitButtonText} > Submit </Text>

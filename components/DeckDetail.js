@@ -94,6 +94,7 @@ class DeckDetail extends Component {
                 <Deck 
                     deckName={singleDeck.title}
                     deckSize={singleDeck.questions.length}
+                    imageURI={singleDeck.image}
                 />
 
                 <TouchableOpacity 

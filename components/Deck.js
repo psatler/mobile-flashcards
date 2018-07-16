@@ -10,8 +10,9 @@ const Deck = (props) => {
     return (
         <View style={deckContainer}>
             <View style={ styles.avatar} >
+
                 <Image 
-                    source={ require('../assets/reactNativeWhiteBackground.png')}
+                    source={props.imageURI ? {uri: props.imageURI } : require('../assets/reactNativeWhiteBackground.png') }
                     style={styles.image}
                 />
             </View>
