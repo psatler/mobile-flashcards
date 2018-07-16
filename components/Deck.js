@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Text, View, StyleSheet, Platform, Image } from 'react-native'
-import { lightPurp, white, purple, lightBlue, red } from '../utils/colors';
-import { Entypo } from '@expo/vector-icons'
+import { lightBlue } from '../utils/colors';
+// import { Entypo } from '@expo/vector-icons'
 
 const AVATAR_IMAGE_HEIGHT = 40
 

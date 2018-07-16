@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Text, View, TouchableOpacity, StyleSheet, Platform, Alert } from 'react-native'
-import { purple, orange, white, red } from '../utils/colors';
+import { purple, orange, white, red, lightBlue, darkBlue } from '../utils/colors';
 import { deleteDeck } from '../utils/asyncDB'
 
 import Deck from './Deck'
@@ -11,7 +11,6 @@ import { removeDeck } from '../actions'
 class DeckDetail extends Component {
     componentDidMount(){
         //setting this so we can ref the method inside the nav options, being able 
-        // this.props.navigation.setParams({ handleRemove: this.removeDeck })
         this.props.navigation.setParams({ handleRemove: this.showDeleteConfirmation })
     }
 
@@ -33,16 +32,11 @@ class DeckDetail extends Component {
                    }}> Delete </Text> 
 
                 </TouchableOpacity>
-                // <Button
-                //   onPress={() => params.handleRemove(deckTitle)}
-                //   title="Delete"
-                //   color={white}
-                // />
               ),
             headerStyle: { //style object wrapping the header
-                backgroundColor: purple,
+                backgroundColor: lightBlue,
             },
-            headerTintColor: orange, //the back button and title both use this property
+            headerTintColor: white, //the back button and title both use this property
             headerTitleStyle: { //to customize the title
                 fontWeight: 'bold',
                 color: white,
@@ -55,14 +49,12 @@ class DeckDetail extends Component {
             'Delete Deck',
             'Do you really want to delete this deck?',
             [
-            //   {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
               {text: 'Cancel', onPress: () => {}, style: 'cancel'},
               {text: 'OK', onPress: () => this.removeDeck(deckTitle)},
             ],
             { cancelable: false }
           )
     }
-
 
     removeDeck = (deckTitle) => {
         const key = deckTitle.split(' ').join('');
@@ -75,14 +67,10 @@ class DeckDetail extends Component {
 
         //go to main page
         this.props.navigation.navigate('DeckList')
-        // this.props.navigation.goBack();
     }
 
     render() {
-        
         const singleDeck = this.props.deck; //deck filtered in mapStateToProps
-
-        console.log('singleDeck', singleDeck)
   
         if(singleDeck === undefined){ //after removing a deck, before going back to main screen, this Component was rendering again, but this time "singleDeck" object is undefined (since it was removed). Therefore, it was causing an error of "Undefined is not an object (evaluating 'singleDeck.title)"
             return (<View></View>)
@@ -90,7 +78,6 @@ class DeckDetail extends Component {
 
         return (
             <View style={styles.container} >
-
                 <Deck 
                     deckName={singleDeck.title}
                     deckSize={singleDeck.questions.length}
@@ -98,7 +85,7 @@ class DeckDetail extends Component {
                 />
 
                 <TouchableOpacity 
-                    style={styles.buttons} 
+                    style={[styles.buttons, {backgroundColor: lightBlue,}]} 
                     onPress={ () => this.props.navigation.navigate('NewCard', {
                         title: singleDeck.title,
                     }) }    
@@ -107,7 +94,7 @@ class DeckDetail extends Component {
                 </TouchableOpacity>
                 
                 <TouchableOpacity 
-                    style={styles.buttons} 
+                    style={[styles.buttons, {backgroundColor: darkBlue,}]} 
                     onPress={ () => this.props.navigation.navigate('StartQuiz', {
                         deck: singleDeck, //passing the whole deck (title and questions/answers)
                     }) }       
@@ -121,10 +108,7 @@ class DeckDetail extends Component {
     }
 }
 
-
-
 const mapStateToProps = (state, { navigation }) => { //passing the state and the current props
-    // const deckTitle = navigation.getParam('deckTitle', 'defaultTitle');
     const { deckTitle } = navigation.state.params;
     const key = deckTitle.split(' ').join('');
     return {
@@ -143,11 +127,12 @@ const styles = StyleSheet.create({
     },
     buttons: {
         alignItems: 'center',
+        borderWidth: 1,
         borderRadius: Platform.OS === 'ios' ? 16 : 2,
-        borderColor: 'black',
+        borderColor: lightBlue,
         margin: 5,
         padding: 10,
-        backgroundColor: purple,
+        // backgroundColor: lightBlue,
         
     },
     addCardButtonText: {
@@ -155,7 +140,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
     },
     startQuizButtonText: {
-        color: white,
+        color: lightBlue,
         fontSize: 20,
     }
 })
