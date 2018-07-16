@@ -5,20 +5,16 @@ import { Text, View, StyleSheet,
 
     } from 'react-native'
 
-import { connect } from 'react-redux'
-import { white, red, green, blue, gray, lightBlue } from '../utils/colors';
+import { white, red, green, blue, gray, lightBlue, darkBlue } from '../utils/colors';
 
 import ShowResult from './ShowResult'
 import FlipCardAnimation from '../utils/flipCardAnimation'
 
-// import ProgressBar from 'react-native-progress/Bar'
 import * as Progress from 'react-native-progress';
 
 class StartQuiz extends Component {
 
-    //TODO: we might have to add a header title here as ADD CARD 
     static navigationOptions = ({ navigation }) => {
-        // console.log('navigation.state.params', navigation.state)
         const { title } = navigation.state.params.deck;
         return {
             title: `${title}'s Quiz`, //from nav params (above)
@@ -37,26 +33,27 @@ class StartQuiz extends Component {
         this.setState({ isQuestion: true });
 
         this.refs.child.flipCard(); // flip cards using a ref to child method
-
     }
 
     rightAnswer = () => {
         const { currentIndex, score } = this.state;
+
         this.setState({
             currentIndex: currentIndex + 1,
             score: score + 1,
             isQuestion: true, //switching back to question after an answer
-        })
+        });
 
         this.refs.child.flipCard(); //flipping back
     }
 
     wrongAnswer = () => {
         const { currentIndex } = this.state;
+
         this.setState({
             currentIndex: currentIndex + 1,
             isQuestion: true, //switching back to question after an answer
-        })
+        });
 
         this.refs.child.flipCard(); //flipping back
     }
@@ -91,18 +88,13 @@ class StartQuiz extends Component {
                             style={ { marginTop: 10, }}
                             progress={ (currentIndex+1)/questions.length } 
                             width={null}
-                            // height={25}
                             color={lightBlue}
                             borderWidth={1}
-                            // unfilledColor={white}
                         />
                     </View>
-
-                    
-                    
+ 
                 </View>
                 
-
                 <View style={styles.cardContainer}>
                     <FlipCardAnimation 
                         showFront={isQuestion} 
@@ -112,7 +104,6 @@ class StartQuiz extends Component {
                     />
                 </View>
 
-            
                 <TouchableOpacity 
                     onPress={this.toggleQuestionAnswer} 
                     style={styles.switchButton}
@@ -124,31 +115,24 @@ class StartQuiz extends Component {
                 </TouchableOpacity>
 
                 <View style={styles.buttonRow} >
-
                     <TouchableOpacity 
                         disabled={isQuestion} //if is question, disable button
                         style={[styles.button, { 
-                            // borderColor: red,
-                            backgroundColor: isQuestion ? gray : red,
+                            backgroundColor: isQuestion ? gray : red, //change background color if is question
                         } ]}
                         onPress={this.wrongAnswer}
                     >
-                        <Text style={[styles.buttonText, { 
-                            // color: red 
-                            } ]} > Incorrect </Text>
+                        <Text style={styles.buttonText} > Incorrect </Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity 
                         disabled={isQuestion} //if is question, disable button
                         style={[styles.button, {
-                            // borderColor: green, 
                             backgroundColor: isQuestion ? gray : green, 
                         }]}
                         onPress={this.rightAnswer}
                     >
-                        <Text style={[styles.buttonText, {
-                            // color: green,
-                            }]} > Correct </Text>
+                        <Text style={styles.buttonText} > Correct </Text>
                     </TouchableOpacity>
                 </View>
 
@@ -160,15 +144,12 @@ class StartQuiz extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // justifyContent: 'space-between'
     },
     scoreContainer: {
-        // flex: 1,
         flexDirection: 'row',
         marginLeft: 10, 
         marginRight: 10, 
         marginTop: 5, 
-        // backgroundColor: 'pink'
     },
     scoreText: {
         flex: 0.5,
@@ -184,16 +165,11 @@ const styles = StyleSheet.create({
         flex: 1, //to make it fill the majority of the space available
         margin: 5,
         marginBottom: 25,
-        // borderWidth: 1,
-        // borderColor: 'black',
-        // borderRadius: Platform.OS === 'ios' ? 16 : 2,
-        // backgroundColor: white,
     },
     switchButton: {
         alignSelf: 'center',
         backgroundColor: white,
         padding: 10,
-        // width: 100,
         borderWidth: 1,
         borderColor: blue,
         borderRadius: Platform.OS === 'ios' ? 16 : 2,
@@ -203,38 +179,21 @@ const styles = StyleSheet.create({
         color: blue,
     },
     buttonRow: {
-        // flex: 1, //making it fill the available content
         flexDirection: 'row',
         justifyContent: 'space-around',
-        // marginTop: 25,
-        // alignItems: 'flex-end',
-        // backgroundColor: white,
-        
     },
     button: {
-        // alignSelf: 'flex-end' , //pushing it to the bottom
         marginTop: 25,
         marginBottom: 25,
         padding: 10,
         borderRadius: Platform.OS === 'ios' ? 16 : 2,
-        // borderWidth: 1,
-        // backgroundColor: white,
     },
     buttonText: {
         fontSize: 15,
         color: white,
         padding: 3,
     }
-
-
-
 })
-
-// const mapStateToProps = (state) => {
-//     return {
-//         decks: state.deckReducer,
-//     }
-// }
 
 export default StartQuiz;
 
