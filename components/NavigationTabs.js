@@ -1,7 +1,6 @@
 import React from 'react';
-import { Platform } from 'react-native'
 import { createBottomTabNavigator, createStackNavigator } from 'react-navigation'
-import { Ionicons, FontAwesome } from '@expo/vector-icons'
+import { Ionicons } from '@expo/vector-icons'
 
 // screens
 import DeckList from './DeckList'
@@ -10,7 +9,7 @@ import DeckDetail from './DeckDetail'
 import NewCard from './NewCard'
 import StartQuiz from './StartQuiz'
 
-import { white, purple } from '../utils/colors';
+import { white, lightBlue } from '../utils/colors';
 
 
 const Tabs = createBottomTabNavigator(
@@ -41,10 +40,6 @@ const MainNavigator = createStackNavigator(
         screen: Tabs, //Tabs navigator component was defined above
         navigationOptions: {
             header: null,
-            // headerTintColor: white,
-            // headerStyle: {
-            //   backgroundColor: purple,
-            // }
         }
     },
     DeckDetail: {
@@ -59,15 +54,15 @@ const MainNavigator = createStackNavigator(
 },
 {
     initialRouteName: 'Home',
-    // navigationOptions: { //defining nav options here so we can share style option to more screens
-    //     headerStyle: {
-    //       backgroundColor: '#f4511e',
-    //     },
-    //     headerTintColor: '#fff',
-    //     headerTitleStyle: {
-    //       fontWeight: 'bold',
-    //     },
-    //   },
+    navigationOptions: { //defining nav options here so we can share style option to more screens
+        headerStyle: {
+          backgroundColor: lightBlue,
+        },
+        headerTintColor: white,
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      },
 })
 
 export default MainNavigator;
