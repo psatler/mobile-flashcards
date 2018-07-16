@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, TouchableOpacity, ScrollView, Platform, Animated, Dimensions } from 'react-native'
+import { Text, View, StyleSheet, TouchableOpacity, ScrollView, Platform, Animated, Alert } from 'react-native'
 import { MaterialIcons } from '@expo/vector-icons'
 import Deck from './Deck'
-import { getDecks } from '../utils/asyncDB'
+import { getDecks, deleteAllDecks } from '../utils/asyncDB'
 
 //redux stuff
 import { connect } from 'react-redux'
-import { retrieveDecks } from '../actions'
+import { retrieveDecks, removeAllDecks } from '../actions'
 import { lightBlue, white } from '../utils/colors';
 
 
@@ -36,6 +36,32 @@ class DeckList extends Component { //DeckList is the main screen (initial route)
         //     // iOS has negative initial scroll value because content inset...
         //     Platform.OS === 'ios' ? -HEADER_MAX_HEIGHT : 0 ),
 
+    }
+
+    showDeleteConfirmation = () => {
+        Alert.alert(
+            'Delete All Decks',
+            'Do you really want to delete the whole list of decks?',
+            [
+            //   {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
+              {text: 'Cancel', onPress: () => {}, style: 'cancel'},
+              {text: 'OK', onPress: () => this.removeDeck()},
+            ],
+            { cancelable: false }
+          )
+    }
+
+
+    removeDeck = () => {
+        //update redux
+        this.props.dispatch(removeAllDecks())
+
+        //delete from DB
+        deleteAllDecks()
+
+        //go to main page
+        // this.props.navigation.navigate('DeckList')
+        // this.props.navigation.goBack();
     }
 
     
@@ -167,6 +193,8 @@ class DeckList extends Component { //DeckList is the main screen (initial route)
 
 
                     <Animated.View style={styles.bar} >
+                        {/* <View style={ {flex: 1, }} ></View> */}
+
                         <Animated.Text style={[
                             styles.title, 
                             {
@@ -192,9 +220,17 @@ class DeckList extends Component { //DeckList is the main screen (initial route)
                             </TouchableOpacity>
 
                         </Animated.View> */}
+
                         
 
                     </Animated.View>
+
+                    <View style={styles.headerIcon} >
+                        <TouchableOpacity onPress={this.showDeleteConfirmation} >
+                            <MaterialIcons name='delete' size={30} color={white}  />
+                        </TouchableOpacity>
+                    </View>
+
                 </Animated.View>
                 {/* ########## ANIMATED HEADER */}
 
@@ -225,6 +261,7 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
     },
     bar: {
+        // flex: 1,
         // flexDirection: 'row',
         backgroundColor: 'transparent',
         marginTop: Platform.OS === 'ios' ? 28 : 38,
@@ -256,10 +293,12 @@ const styles = StyleSheet.create({
         width: null,
         resizeMode: 'cover',
     },
-    // headerIcon: {
-    //     position: 'absolute',
-    //     left: screenWidth,
-    // }
+    headerIcon: {
+        // flex: 1,
+        alignSelf: 'flex-end',
+        top: 10,
+        right: 10,
+    }
 });
 
 export default connect(mapStateToProps)(DeckList);
