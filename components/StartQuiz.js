@@ -58,23 +58,26 @@ class StartQuiz extends Component {
         this.refs.child.flipCard(); //flipping back
     }
 
-    
-    
-
-    
+   
+     
     render(){
-        const { questions } = this.props.navigation.state.params.deck;
+        // const { questions } = this.props.navigation.state.params.deck;
+        const { deck } = this.props.navigation.state.params;
+        console.log('deckdeck ', deck)
+        const { questions } = deck; //destructuring again to take the questions array out
         const { currentIndex, isQuestion, score } = this.state;
 
         if(questions.length === 0){ //there is no cards inside deck
             return (
-                <ShowResult score={score} total={questions.length} />
+                // <ShowResult score={score} total={questions.length} />
+                <ShowResult score={score} singleDeck={deck} /> 
             )
         }
 
         if(currentIndex >= questions.length){ //show results
             return (
-                <ShowResult score={score} total={questions.length} />
+                // <ShowResult score={score} total={questions.length} />
+                <ShowResult score={score} singleDeck={deck} />
             )
         }
 

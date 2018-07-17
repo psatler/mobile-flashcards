@@ -14,7 +14,10 @@ class ShowResult extends Component {
     }
 
     render() {
-        const { score, total } = this.props;
+        const { score, singleDeck } = this.props;
+        const total = singleDeck.questions.length;
+
+        console.log('NAV ', singleDeck)
 
         return (
             <View style={styles.container} >
@@ -40,10 +43,13 @@ class ShowResult extends Component {
                             style={ { 
                                 alignItems: 'center', 
                                 } }
-                            onPress={ () => this.props.navigation.goBack()}        
+                            onPress={ () => this.props.navigation.goBack()} 
+                            // onPress={ () => this.props.navigation.navigate('StartQuiz', {
+                            //     deck: singleDeck,
+                            // }) }        
                         >
                             <EvilIcons name={'redo' } size={50} color={lightBlue}  />
-                             { total === 0 ? ( <Text style={{color: lightBlue}}> Go Back </Text> ) : ( <Text style={{color: lightBlue}}> Redo Quiz </Text> ) }
+                             { total === 0 ? ( <Text style={{color: lightBlue}}> Go Back </Text> ) : ( <Text style={{color: lightBlue}}> Restart Quiz </Text> ) }
                         </TouchableOpacity>
 
                         <TouchableOpacity 
