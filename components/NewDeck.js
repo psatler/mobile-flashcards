@@ -44,8 +44,12 @@ class NewDeck extends Component {
                 input: '',
             })
 
-            //go back to home
-            this.props.navigation.navigate('DeckList')
+            
+            // this.props.navigation.navigate('DeckList') //go back to home
+            this.props.navigation.navigate('DeckDetail', { //go to details screen of the newly created deck
+                deckTitle: deck.title,
+                deckLength: deck.questions.length
+            })
 
             //save to DB (async storage)
             saveDeckTitle(keyTitle, deck);
