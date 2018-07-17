@@ -2,10 +2,16 @@ import React, { Component } from 'react'
 import { Text, View, StyleSheet, Platform, TouchableOpacity } from 'react-native'
 import { Ionicons, EvilIcons } from '@expo/vector-icons'
 import { white, darkBlue, lightBlue } from '../utils/colors';
+import { clearLocalNotification, setLocalNotification } from '../utils/localNotifications'
 import { withNavigation } from 'react-navigation';
 
 class ShowResult extends Component {
 
+    componentDidMount(){ //when the page mounts, it means the user has completed a deck, so we need to clear the old notification and set a new one
+        clearLocalNotification() 
+            .then(setLocalNotification); //sets a new local notification for tomorrow 
+
+    }
 
     render() {
         const { score, total } = this.props;
