@@ -15,9 +15,7 @@ class ShowResult extends Component {
 
     render() {
         const { score, singleDeck } = this.props;
-        const total = singleDeck.questions.length;
-
-        console.log('NAV ', singleDeck)
+        const total = singleDeck.questions.length
 
         return (
             <View style={styles.container} >
@@ -39,27 +37,28 @@ class ShowResult extends Component {
                 }
 
                     <View style={styles.buttonsContainer} >
-                        <TouchableOpacity 
-                            style={ { 
-                                alignItems: 'center', 
-                                } }
-                            onPress={ () => this.props.navigation.goBack()} 
-                            // onPress={ () => this.props.navigation.navigate('StartQuiz', {
-                            //     deck: singleDeck,
-                            // }) }        
-                        >
-                            <EvilIcons name={'redo' } size={50} color={lightBlue}  />
-                             { total === 0 ? ( <Text style={{color: lightBlue}}> Go Back </Text> ) : ( <Text style={{color: lightBlue}}> Restart Quiz </Text> ) }
-                        </TouchableOpacity>
+
+                        { total !== 0 ? (
+                            <TouchableOpacity 
+                            style={ {alignItems: 'center' }}  
+                            onPress={ () => this.props.restartFunc()}    
+                            >
+                                <EvilIcons name={'redo' } size={50} color={lightBlue}  />
+                                <Text style={{color: lightBlue}}> Restart Quiz </Text>
+                            </TouchableOpacity>
+                        ) : ( null ) }
 
                         <TouchableOpacity 
                             style={ { 
                                 alignItems: 'center', 
                                 } }
-                            onPress={ () => this.props.navigation.navigate('DeckList')}        
+                            onPress={ () => this.props.navigation.navigate('DeckDetail', {
+                                deckTitle: singleDeck.title,
+                                deckLength: singleDeck.questions.length
+                            })}        
                         >
                             <Ionicons name={Platform.OS === 'ios' ? 'ios-home' : 'md-home' } size={50} color={lightBlue}  />
-                            <Text style={{color: lightBlue}}> Home </Text>
+                            <Text style={{color: lightBlue}}> Back to Deck </Text>
                         </TouchableOpacity>
                     </View>
             
