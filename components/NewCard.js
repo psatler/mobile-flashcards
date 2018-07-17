@@ -68,6 +68,9 @@ class NewCard extends Component {
                     placeholder={'Insert a question'}
                     style={styles.textInputStyle}
                     onChangeText={this.handleQuestionTextChange}
+                    //the snippet below is so when the user presses the return on the keyboard, the referenced textInput is focused
+                    onSubmitEditing={() => { this.secondTextInput.focus(); }}
+                    blurOnSubmit={false}
                 />
 
                 <TextInput 
@@ -75,6 +78,7 @@ class NewCard extends Component {
                     placeholder={"Insert an answer"}
                     style={styles.textInputStyle}
                     onChangeText={this.handleAnswerTextChange}
+                    ref={(input) => { this.secondTextInput = input; }} //reference to trigger focus
                 />
 
                 <TouchableOpacity style={styles.submitButton} onPress={this.submitCard}>
