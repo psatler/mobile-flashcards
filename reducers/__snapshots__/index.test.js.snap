@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Deck Reducer should handle ADD_CARD action 1`] = `
+Object {
+  "newDeck": Object {
+    "createdAt": undefined,
+    "image": undefined,
+    "questions": Array [
+      Object {
+        "answer": "This is a test answer",
+        "question": "This is a test question",
+      },
+    ],
+    "title": "new Deck",
+  },
+}
+`;
+
+exports[`Deck Reducer should handle REMOVE_DECK action 1`] = `
+Object {
+  "JavaScript": Object {
+    "questions": Array [
+      Object {
+        "answer": "The combination of a function and the lexical environment within which that function was declared.",
+        "question": "What is a closure?",
+      },
+    ],
+    "title": "JavaScript",
+  },
+}
+`;
