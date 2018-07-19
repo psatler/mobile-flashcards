@@ -8,7 +8,7 @@ import {
 } from '../actions'
 
 const deckInit = {};
-const deckReducer = (state = deckInit, action) => {
+export const deckReducer = (state = deckInit, action) => { //using export here for unit test purposes
     switch(action.type){
         case RETRIEVE_DECKS:
             // console.log('RETRIEVE_DECKS', action.payload)
