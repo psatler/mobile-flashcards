@@ -1,4 +1,5 @@
 import React from 'react';
+// import { Platform } from 'react-native'
 import Deck from './Deck';
 import { data } from '../utils/mockData'
 
@@ -8,13 +9,25 @@ import ShallowRenderer from 'react-test-renderer/shallow';
 
 describe('[Component] Deck', () => {
     const singleDeck = data['JavaScript'];
+    const deckWithImage = data['React'];
+    deckWithImage.image = '../assets/reactNativeWhiteBackground.png'
+    
 
-    it('renders correctly', () => {
+    it('renders correctly - no image from camera roll inserted', () => {
         const rendered = renderer.create(
             <Deck 
                 deckName={singleDeck.title}
                 deckSize={singleDeck.questions.length}
-                imageURI={singleDeck.image}
+            />).toJSON();
+        expect(rendered).toMatchSnapshot();
+    });
+
+    it('renders correctly - with image from camera roll inserted', () => {
+        const rendered = renderer.create(
+            <Deck 
+                deckName={deckWithImage.title}
+                deckSize={deckWithImage.questions.length}
+                imageURI={deckWithImage.image}
             />).toJSON();
         expect(rendered).toMatchSnapshot();
     });
@@ -30,6 +43,22 @@ describe('[Component] Deck', () => {
         const tree = renderer.getRenderOutput();
         expect(tree).toMatchSnapshot();
       });
+
+    //#### MOCK NO WORKING =( 
+    xit('Testing for Android branch in styles - it should be border of value 2', () => {
+        jest.mock('Platform', () => {
+            const Platform = require.requireActual('Platform');
+            Platform.OS = 'android';
+            return Platform;
+        });
+
+        const rendered = renderer.create(
+            <Deck 
+                deckName={singleDeck.title}
+                deckSize={singleDeck.questions.length}
+            />).toJSON();
+        expect(rendered).toMatchSnapshot();
+    });
 });
 
 
