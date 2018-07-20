@@ -1,12 +1,17 @@
 import React from 'react'
 import 'react-native'
 import { ShowResult } from './ShowResult'
-
+import { data } from '../utils/mockData'
 
 import renderer from 'react-test-renderer';
 import ShallowRenderer from 'react-test-renderer/shallow';
 
-import { data } from '../utils/mockData'
+//###### ENZYME STUFF
+import { configure } from 'enzyme'
+import Adapter from 'enzyme-adapter-react-16'
+configure({ adapter: new Adapter() })
+import { shallow } from 'enzyme'
+
 
 
 describe('[Component] Deck', () => {
@@ -34,8 +39,16 @@ describe('[Component] Deck', () => {
         expect(tree).toMatchSnapshot();
     });
 
-
     it('should show a call the restart button', () => {
+        const score = 0;
+        const wrapper = shallow(
+            <ShowResult score={score} singleDeck={deck} restartFunc={restartQuiz} />
+        )
+
+    })
+
+
+    xit('should show a call the restart button', () => {
         const score = 0;
         let rendered = renderer.create(
             <ShowResult score={score} singleDeck={deck} restartFunc={restartQuiz} />
