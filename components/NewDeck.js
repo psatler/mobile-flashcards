@@ -9,7 +9,7 @@ import { addDeck } from '../actions'
 
 import { ImagePicker, Permissions } from 'expo'
 
-class NewDeck extends Component {
+export class NewDeck extends Component { //exporting for testing purposes
 
     //local state for handling form inputs
     state = {
