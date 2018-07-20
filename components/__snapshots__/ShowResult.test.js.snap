@@ -1,0 +1,283 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[Component] Deck should show a message saying the score and two buttons: restart quiz and back to deck 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 0.5,
+      }
+    }
+  />
+  <View
+    style={
+      Object {
+        "backgroundColor": "#18263D",
+        "borderColor": "black",
+        "borderRadius": 16,
+        "borderWidth": 1,
+        "flex": 2,
+        "margin": 10,
+      }
+    }
+  >
+    <View>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Object {
+            "color": "#00A4D3",
+            "fontSize": 30,
+            "marginBottom": 30,
+            "marginTop": 20,
+            "textAlign": "center",
+          }
+        }
+      >
+         Final Result 
+      </Text>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Object {
+            "color": "#fff",
+            "fontSize": 15,
+            "textAlign": "center",
+          }
+        }
+      >
+         You've Got 
+        0
+         out of 
+        1
+         points possible! 
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "justifyContent": "space-evenly",
+          "marginTop": 30,
+        }
+      }
+    >
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hasTVPreferredFocus={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "opacity": 1,
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+        />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#00A4D3",
+            }
+          }
+        >
+           Restart Quiz 
+        </Text>
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hasTVPreferredFocus={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "opacity": 1,
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+        />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#00A4D3",
+            }
+          }
+        >
+           Back to Deck 
+        </Text>
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  />
+</View>
+`;
+
+exports[`[Component] Deck should show a message saying there is no cards inside deck and display only one button: back to deck 1`] = `
+<Component
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <Component
+    style={
+      Object {
+        "flex": 0.5,
+      }
+    }
+  />
+  <Component
+    style={
+      Object {
+        "backgroundColor": "#18263D",
+        "borderColor": "black",
+        "borderRadius": 16,
+        "borderWidth": 1,
+        "flex": 2,
+        "margin": 10,
+      }
+    }
+  >
+    <Component>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Object {
+            "color": "#00A4D3",
+            "fontSize": 30,
+            "marginBottom": 30,
+            "marginTop": 20,
+            "textAlign": "center",
+          }
+        }
+      >
+         There is no cards inside this deck. 
+      </Text>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Object {
+            "color": "#fff",
+            "fontSize": 15,
+            "textAlign": "center",
+          }
+        }
+      >
+         Please insert some card and do the quiz again 
+      </Text>
+    </Component>
+    <Component
+      style={
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "justifyContent": "space-evenly",
+          "marginTop": 30,
+        }
+      }
+    >
+      <TouchableOpacity
+        activeOpacity={0.2}
+        onPress={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+          }
+        }
+      >
+        <Icon
+          allowFontScaling={false}
+          color="#00A4D3"
+          name="ios-home"
+          size={50}
+        />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#00A4D3",
+            }
+          }
+        >
+           Back to Deck 
+        </Text>
+      </TouchableOpacity>
+    </Component>
+  </Component>
+  <Component
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  />
+</Component>
+`;

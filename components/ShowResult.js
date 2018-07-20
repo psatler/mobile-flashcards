@@ -5,7 +5,7 @@ import { white, darkBlue, lightBlue } from '../utils/colors';
 import { clearLocalNotification, setLocalNotification } from '../utils/localNotifications'
 import { withNavigation } from 'react-navigation';
 
-class ShowResult extends Component {
+export class ShowResult extends Component { //using export here as well to make it easier to test (avoid connected components)
 
     componentDidMount(){ //when the page mounts, it means the user has completed a deck, so we need to clear the old notification and set a new one
         clearLocalNotification() 

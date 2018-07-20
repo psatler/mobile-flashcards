@@ -42,6 +42,7 @@ class NewDeck extends Component {
             //reset state
             this.setState({
                 input: '',
+                image: null,
             })
 
             
