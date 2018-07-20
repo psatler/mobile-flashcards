@@ -1,5 +1,7 @@
 import React from 'react'
+import 'react-native'
 import { ShowResult } from './ShowResult'
+
 
 import renderer from 'react-test-renderer';
 import ShallowRenderer from 'react-test-renderer/shallow';
@@ -30,6 +32,20 @@ describe('[Component] Deck', () => {
         );
         const tree = renderer.getRenderOutput();
         expect(tree).toMatchSnapshot();
+    });
+
+
+    it('should show a call the restart button', () => {
+        const score = 0;
+        let rendered = renderer.create(
+            <ShowResult score={score} singleDeck={deck} restartFunc={restartQuiz} />
+        ).getInstance();
+        // expect(rendered.).toBeCalled();
+        // expect(rendered.props.restartFunc).toBeTruthy();
+        // expect(rendered.props.restartFunc).toBeCalled();
+        console.log(rendered.props.restartFunc)
+        // tree.find('TouchableOpacity').forEach( button => console.log(button))
+        // expect(tree).toMatchSnapshot();
     });
 
 });
