@@ -1,15 +1,19 @@
 import React from 'react'
 import { NewDeck } from './NewDeck'
 import { ImagePicker, Permissions } from 'expo'
-import { addDeck } from '../actions'
-import renderer from 'react-test-renderer';
-// import ShallowRenderer from 'react-test-renderer/shallow';
+import { addDeck, ADD_DECK } from '../actions'
 
 //###### ENZYME STUFF
 import { configure } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 configure({ adapter: new Adapter() })
 import { shallow } from 'enzyme'
+
+//### REDUX MOCK STORE
+import configureMockStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+const mockStore = configureMockStore([ thunk ]);
+const store = mockStore({ });
 
 
 jest.mock('expo', ()=>({
@@ -35,6 +39,7 @@ jest.mock('expo', ()=>({
 describe('[Component] New Deck', () => {
 
     afterEach( () => {
+        store.clearActions()
         // jest.resetAllMocks();
     })
 
@@ -73,6 +78,27 @@ describe('[Component] New Deck', () => {
         // console.log('after ',ImagePicker.launchImageLibraryAsync);
         await wrapper.instance().pickImage()
     });
+
+    it('should dispatch an action to the store', async () => {
+        const deck = {
+            title: 'JavaScript',
+            questions: [
+              {
+                question: 'What is a closure?',
+                answer: 'The combination of a function and the lexical environment within which that function was declared.'
+              }
+            ]
+        }
+        const expectedActions = [
+            { type: ADD_DECK, payload: deck }
+        ]
+
+        await store.dispatch(addDeck(deck))
+        expect(store.getActions()).toEqual(expectedActions);
+        expect(store.getActions()).toMatchSnapshot();
+    })
+
+
 
     xit('should call enter if statement', () => {
         const wrapper = shallow(<NewDeck />);

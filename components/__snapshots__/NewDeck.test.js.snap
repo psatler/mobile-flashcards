@@ -521,3 +521,20 @@ ShallowWrapper {
   },
 }
 `;
+
+exports[`[Component] New Deck should dispatch an action to the store 1`] = `
+Array [
+  Object {
+    "payload": Object {
+      "questions": Array [
+        Object {
+          "answer": "The combination of a function and the lexical environment within which that function was declared.",
+          "question": "What is a closure?",
+        },
+      ],
+      "title": "JavaScript",
+    },
+    "type": "ADD_DECK",
+  },
+]
+`;
