@@ -1,4 +1,4 @@
-// import { AsyncStorage } from 'react-native'
+import { AsyncStorage } from 'react-native'
 import { data } from './mockData'
 const FLASHCARDS_DECKS_KEY = 'Flashcards:decks'
 import { 
@@ -13,25 +13,118 @@ import {
 //inspired from https://stackoverflow.com/questions/40952566/how-to-test-async-storage-with-jest with some modifications
 jest.mock('react-native', () => {
     const items = {};
-    AsyncStorage: {
-        setItem: jest.fn( (key, value) => {
-            return new Promise( (resolve, reject) => {
-                return (typeof key !== 'string' || typeof value !== 'string')
-                ? reject(new Error('key and value must be string'))
-                : resolve(items[key] = value);
-            } ) 
-        });
+    const mockData = {
+        React: {
+          title: 'React',
+          questions: [
+            {
+              question: 'What is React?',
+              answer: 'A library for managing user interfaces'
+            },
+            {
+              question: 'Where do you make Ajax requests in React?',
+              answer: 'The componentDidMount lifecycle event'
+            }
+          ]
+        },
+        JavaScript: {
+          title: 'JavaScript',
+          questions: [
+            {
+              question: 'What is a closure?',
+              answer: 'The combination of a function and the lexical environment within which that function was declared.'
+            }
+          ]
+        }
+      }
 
-        getItem: jest.fn( (key) => {
-            return new Promise( (resolve) => {
-                return items.hasOwnProperty(key) ? resolve(items[key]) : resolve(null)
-            })
-        });
-
-    };
+    return {
+        AsyncStorage: {
+            setItem: jest.fn( (key, value) => {
+                return new Promise( (resolve, reject) => {
+                    return (typeof key !== 'string' || typeof value !== 'string')
+                    ? reject(new Error('key and value must be string'))
+                    : resolve(items[key] = value);
+                } ) 
+            }),
     
+            getItem: jest.fn( (key) => {
+                return new Promise( (resolve) => {
+                    return resolve(JSON.stringify(mockData)) //directly making it return the mockData object
+                    // return items.hasOwnProperty(key) ? resolve(items[key]) : resolve(null)
+                })
+            }),
 
+            // mergeItem: jest.fn( (key, obj) => {
+            //     return new Promise( (resolve, reject) => {
+            //         resolve()
+            //     })
+            // })
+    
+        },
+    }
 })
+
+
+describe('[Async Storage] Testing ', () => {
+    afterEach(() => {
+        jest.resetAllMocks();
+    });
+
+    it('should set initial data', async () => {
+        const decks = await getDecks();
+        expect(decks).toEqual(data);
+        // await AsyncStorage.setItem(FLASHCARDS_DECKS_KEY, JSON.stringify(data))
+        // const value = await AsyncStorage.getItem(FLASHCARDS_DECKS_KEY)
+        // expect(JSON.parse(value)).toEqual(data)
+    })
+
+});
+
+
+
+
+//inspired from https://stackoverflow.com/questions/40952566/how-to-test-async-storage-with-jest with some modifications
+
+
+//## a sligthly different approach
+// jest.mock('react-native', () => {
+//     const reactNative = require.requireActual('react-native');
+//     const items = {};
+
+//     return {
+//         AsyncStorage: {
+//             setItem: jest.fn( (key, value) => {
+//                 return new Promise( (resolve, reject) => {
+//                     return (typeof key !== 'string' || typeof value !== 'string')
+//                     ? reject(new Error('key and value must be string'))
+//                     : resolve(items[key] = value);
+//                 } ) 
+//             }),
+    
+//             getItem: jest.fn( (key) => {
+//                 return new Promise( (resolve) => {
+//                     return items.hasOwnProperty(key) ? resolve(items[key]) : resolve(null)
+//                 })
+//             }),
+    
+//         },
+//         ...reactNative,
+//     }
+
+// })
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -77,21 +170,3 @@ jest.mock('react-native', () => {
 // const AsyncStorage = new MockStorage(storageCache);
 
 // jest.setMock('AsyncStorage', AsyncStorage)
-
-
-
-describe('[Async Storage] Testing ', () => {
-    // const { AsyncStorage } = require('react-native');
-
-    afterEach(() => {
-        jest.resetAllMocks();
-    });
-
-    it('should set initial data', async () => {
-        const decks = await getDecks();
-        expect(decks).toBe(data);
-        // await AsyncStorage.setItem(FLASHCARDS_DECKS_KEY, JSON.stringify(data))
-        // const value = await AsyncStorage.getItem(FLASHCARDS_DECKS_KEY)
-        // expect(JSON.parse(value)).toEqual(data)
-    })
-});
