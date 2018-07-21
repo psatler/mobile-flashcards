@@ -1,5 +1,6 @@
 import React from 'react'
 import { NewDeck } from './NewDeck'
+import { ImagePicker, Permissions } from 'expo'
 import renderer from 'react-test-renderer';
 // import ShallowRenderer from 'react-test-renderer/shallow';
 
@@ -31,9 +32,16 @@ describe('[Component] New Deck', () => {
         // console.log(NewDeck.prototype)
     });
 
-    it('should call askPermission method', () => {
+    xit('should call askPermission method', async () => {
+        jest.mock('expo', ()=>({
+            Permissions: {
+               askAsync: jest.fn().mockImplementationOnce(() => ({ status: 'granted' }))
+            }
+          }))
+
         const wrapper = shallow(<NewDeck />);
-        wrapper.instance().askPermission();
+        const res = await wrapper.instance().askPermission();
+        console.log('res', res)
     })
     
 });
