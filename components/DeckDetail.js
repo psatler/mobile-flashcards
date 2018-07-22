@@ -8,7 +8,7 @@ import Deck from './Deck'
 import { connect } from 'react-redux'
 import { removeDeck } from '../actions'
 
-class DeckDetail extends Component {
+export class DeckDetail extends Component {
     componentDidMount(){
         //setting this so we can ref the method inside the nav options, being able 
         this.props.navigation.setParams({ handleRemove: this.showDeleteConfirmation })
