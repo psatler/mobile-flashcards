@@ -60,6 +60,7 @@ describe('[Component] StartQuiz', () => {
         expect(wrapper.state.score).toEqual(0);
     });
 
+    //############## Doing a mock below ###########
     it('should return there is no cards message', () => {
         deckMock = data['React'];
         deckMock.questions = []; //no cards

@@ -17,7 +17,7 @@ const HEADER_MIN_HEIGHT = Platform.OS === 'ios' ? 60 : 73;
 const HEADER_SCROLL_DISTANCE = HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT;
 
 
-class DeckList extends Component { //DeckList is the main screen (initial route)
+export class DeckList extends Component { //DeckList is the main screen (initial route)
 
     componentDidMount(){
 
