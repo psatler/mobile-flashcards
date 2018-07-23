@@ -8,7 +8,7 @@ import { addCardToDeck } from '../utils/asyncDB'
 import { connect } from 'react-redux'
 import { addCard } from '../actions'
 
-class NewCard extends Component {
+export class NewCard extends Component {
 
     static navigationOptions = () => {
         return {

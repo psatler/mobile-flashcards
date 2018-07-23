@@ -102,13 +102,13 @@ describe('[Component] New Deck', () => {
 
     xit('should call enter if statement', () => {
         const wrapper = shallow(<NewDeck />);
-        // const textInput = wrapper.find('TextInput').instance().value = 'bosta'
-        wrapper.find('TextInput').getDOMNode().value = 'bosta'
-        // textInput.value = 'bosta'
+        // const textInput = wrapper.find('TextInput').instance().value = 'testing input'
+        wrapper.find('TextInput').getDOMNode().value = 'testing input'
+        // textInput.value = 'testing input'
         // console.log('after ',textInput);
 
         // wrapper.instance().submitDeck();
-        expect(wrapper.state("input")).toEqual('bosta')
+        expect(wrapper.state("input")).toEqual('testing input')
     })
 
 
