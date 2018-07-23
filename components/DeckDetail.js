@@ -108,7 +108,8 @@ export class DeckDetail extends Component {
     }
 }
 
-const mapStateToProps = (state, { navigation }) => { //passing the state and the current props
+//exporting mapStateToProps to test it (testing passing the store was not working - line 46 of test file)
+export const mapStateToProps = (state, { navigation }) => { //passing the state and the current props
     const { deckTitle } = navigation.state.params;
     const key = deckTitle.split(' ').join('');
     return {

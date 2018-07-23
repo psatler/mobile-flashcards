@@ -1,13 +1,13 @@
 import React from 'react';
-import ConnectedDeckDetail, { DeckDetail } from './DeckDetail' 
+import ConnectedDeckDetail, { DeckDetail, mapStateToProps } from './DeckDetail' 
 import { data } from '../utils/mockData'
-
+import renderer from 'react-test-renderer'
 
 //####################################### ENZYME STUFF
 import { configure } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 configure({ adapter: new Adapter() })
-import { shallow } from 'enzyme'
+import { shallow, mount } from 'enzyme'
 
 //####################################### REDUX MOCK STORE
 import configureMockStore from 'redux-mock-store';
@@ -42,19 +42,42 @@ describe('[Component] DeckDetail', () => {
         jest.resetAllMocks();
     })
 
-    //gives me  TypeError: Cannot read property 'React' of undefined ??       
+
+
+    //####################### gives me  TypeError: Cannot read property 'React' of undefined ?? ######      
     xit('shallow renders ConnectedDeckDetail correctly', () => { 
         const wrapper = shallow(
-            // <ConnectedDeckDetail navigation={navigationMock} />,
-            <ConnectedDeckDetail  />,
+            <ConnectedDeckDetail navigation={navigationMock} />,
+            // <ConnectedDeckDetail  />,
             { context: { store: storeMock } },
         );
         expect(wrapper.dive()).toMatchSnapshot();
     });
+    
+    it('testing mapStateToProps', () => { //had to export mapStateToProps in order to test, because above test was failing
+        const navMock = {navigation: { state: { params: { deckTitle: 'React'}}}}
+        const deckReturned = mapStateToProps(initialState.state,  navMock );
+        expect(deckReturned).toEqual({deck: data['React']})
+    })
+    //##################################################################################################
+
+
 
     it('shallow renders Unconnected DeckDetail correctly', () => {        
         const wrapper = shallow(<DeckDetail navigation={navigationMock} />);
         expect(wrapper).toMatchSnapshot();
+    });
+
+    it('tests the removeDeck method', () => {
+        const dispatch = jest.fn(); //mocking dispatch
+        const wrapper = renderer.create(<DeckDetail navigation={navigationMock} dispatch={dispatch} />).getInstance();
+        wrapper.removeDeck('React')
+    });
+
+    it('tests the showDeleteConfirmation method', () => {
+        // const dispatch = jest.fn(); //mocking dispatch
+        const wrapper = renderer.create(<DeckDetail navigation={navigationMock}  />).getInstance();
+        wrapper.showDeleteConfirmation('React')
     });
 
     // ###### IT'S SIMILAR TO ShowResult.test.js file
