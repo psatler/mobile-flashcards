@@ -5,7 +5,45 @@ Mobile Flashcards is an app which allows the users study a collection of flashca
 
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 
+## Demo
+Open your [Expo App](https://expo.io/) and scan the QR code below to experience Mobile Flashcards on your phone. More details on the [project's expo page]().
+
+------- FILL HERE WITH QR CODE
+
 ## TL;DR
+To run this project
+
+To run this project in your local machine:
+* Clone this git repository 
+    - `git clone https://github.com/psatler/mobile-flashcards.git`
+
+* Install the dependencies
+    - `cd mobile-flashcards`
+    - `npm install`
+* Start the application
+    - `npm start`
+  
+  Make sure your phone and PC are both on the same network. So, to guarantee the app will run on your phone device, override the IP address/hostname that is detected by Create React Native App doing the following before running `npm start`:
+
+  * Specify your own hostname via the `REACT_NATIVE_PACKAGER_HOSTNAME` environment variable. So, if my IPv4 wi-fi address was `192.168.25.48`, for example, I'd do
+
+    Mac and Linux:
+
+    ```
+    REACT_NATIVE_PACKAGER_HOSTNAME='192.168.25.48' npm start
+    ```
+
+    Windows:
+    ```
+    set REACT_NATIVE_PACKAGER_HOSTNAME='192.168.25.48'
+    npm start
+    ```
+
+
+## Where this project was tested on
+
+make a table here
+
 Below you'll find information about performing common tasks. The most recent version of this guide is available [here](https://github.com/react-community/create-react-native-app/blob/master/react-native-scripts/template/README.md).
 
 ## Table of Contents
