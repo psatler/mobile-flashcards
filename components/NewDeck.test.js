@@ -49,8 +49,15 @@ describe('[Component] New Deck', () => {
     });
 
     it('should press the submit button', () => {
-        const wrapper = shallow(<NewDeck />);
+        const navigation = { navigate: jest.fn() }
+        const dispatch = jest.fn()
+        const wrapper = shallow(<NewDeck navigation={navigation} dispatch={dispatch} />);
+        wrapper.setState({
+            input: 'A New Deck',
+            image: '../assets/reactNativeWhiteBackground.png',
+        })
         wrapper.instance().submitDeck();
+        // wrapper.update();
         expect(wrapper.state("input")).toEqual('');
         expect(wrapper.state("image")).toEqual(null);
 
@@ -62,6 +69,7 @@ describe('[Component] New Deck', () => {
         // expect(spy).toHaveBeenCalled();
         // console.log(NewDeck.prototype)
     });
+    
 
     it('should call askPermission method, which call pickImage', async () => {
         const wrapper = shallow(<NewDeck />);
