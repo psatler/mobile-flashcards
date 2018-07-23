@@ -7,7 +7,7 @@ import { data } from '../utils/mockData'
 import { configure } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 configure({ adapter: new Adapter() })
-import { shallow } from 'enzyme'
+import { shallow, mount } from 'enzyme'
 
 //####################################### REDUX MOCK STORE
 import configureMockStore from 'redux-mock-store';
@@ -26,11 +26,6 @@ const storeMock = mockStore(initialState);
 
 
 describe('[Component] DeckList', () => {
-    // const navigationMock = { navigation: { navigate: {
-    //     deckTitle: data['JavaScript'].title,
-    //     deckLength: data['JavaScript'].questions.length,
-    // } }};
-
     const navigation = { navigate: jest.fn() }; //as shown here https://stackoverflow.com/questions/46090713/testing-component-that-uses-react-navigation-with-jest/46114589
 
     it('shallow renders ConnectedDeckList correctly', () => {        
@@ -67,6 +62,14 @@ describe('[Component] DeckList', () => {
         wrapper.find('TouchableOpacity').last().props().onPress() //this is the showDeleteConfirmation method (the last touchableOpacity)
         expect(navigation.navigate).toHaveBeenCalledTimes(1);
     });
+
+    // it('calls getDecks method inside componentDidMount', () => {
+    //     // console.log(DeckList.prototype)
+    //     const spy = jest.spyOn(DeckList.prototype, 'getDecks');
+    //     const wrapper = mount(<DeckList decks={data} navigation={navigation}  />);
+    //     wrapper.instance().getDecks();
+    //     expect(spy).toHaveBeenCalled();
+    // })
 });
 
 

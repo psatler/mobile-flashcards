@@ -38,10 +38,15 @@ describe('[Component] DeckDetail', () => {
         navigate: jest.fn(), //mocking the navigate functions used to move from one screen to another 
     };
 
-    
-    xit('shallow renders ConnectedDeckDetail correctly', () => {        
+    afterEach( () => {
+        jest.resetAllMocks();
+    })
+
+    //gives me  TypeError: Cannot read property 'React' of undefined ??       
+    xit('shallow renders ConnectedDeckDetail correctly', () => { 
         const wrapper = shallow(
-            <ConnectedDeckDetail navigation={navigationMock} />,
+            // <ConnectedDeckDetail navigation={navigationMock} />,
+            <ConnectedDeckDetail  />,
             { context: { store: storeMock } },
         );
         expect(wrapper.dive()).toMatchSnapshot();
@@ -53,11 +58,17 @@ describe('[Component] DeckDetail', () => {
     });
 
     // ###### IT'S SIMILAR TO ShowResult.test.js file
-    xit('calls (presses) the second touchableOpacity', () => {
-        const wrapper = shallow(<DeckDetail navigation={navigationMock} />);
-        wrapper.find('TouchableOpacity').last().props().onPress()
-        expect(navigationMock.navigate).toHaveBeenCalled();
-    })
+    it('calls Add Card touchableOpacity button', () => {
+        const wrapper = shallow(<DeckDetail deck={deck} navigation={navigationMock} />);
+        wrapper.find('TouchableOpacity').first().props().onPress() //first touchableOpacity
+        expect(navigationMock.navigate).toHaveBeenCalledTimes(1);
+    });
+
+    it('calls StartQuiz touchableOpacity button', () => {
+        const wrapper = shallow(<DeckDetail deck={deck} navigation={navigationMock} />);
+        wrapper.find('TouchableOpacity').last().props().onPress() //secondo (last) touchableOpacity
+        expect(navigationMock.navigate).toHaveBeenCalledTimes(1);
+    });
 
 });
 
