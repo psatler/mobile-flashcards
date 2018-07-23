@@ -18,15 +18,15 @@ jest.mock('expo', () => {
 });
 
 
-
+//https://stackoverflow.com/questions/46761107/using-jest-to-mock-named-imports
 describe('[Local Notifications] Tests', () => {
     afterEach(() => {
         jest.resetAllMocks();
     });
 
     xit('testing creating Local Notifications', () => {
-        const createLocal = setLocalNotification();
-        // expect(createLocal).toBeTruthy()
+        setLocalNotification();
+        expect(Permissions.askAsync).toBeCalled(); //ReferenceError: Permissions is not defined
     });
 
 });
