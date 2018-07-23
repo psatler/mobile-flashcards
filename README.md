@@ -1,5 +1,11 @@
+# Mobile Flashcards
+> Final assessment project for Udacity's React Native course, in order to demonstrate understanding of the basics of React Native
+
+Mobile Flashcards is an app which allows the users study a collection of flashcards. Users can create different categories of flashcards called as "Decks", also being able to add cards and do quizzes on those decks.
+
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 
+## TL;DR
 Below you'll find information about performing common tasks. The most recent version of this guide is available [here](https://github.com/react-community/create-react-native-app/blob/master/react-native-scripts/template/README.md).
 
 ## Table of Contents
