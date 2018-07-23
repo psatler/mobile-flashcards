@@ -24,7 +24,6 @@ describe('[Component] StartQuiz', () => {
         expect(wrapper).toMatchSnapshot()
     });
 
-
     it('should toggle state property "isQuestion" to true or false', () => {
         const wrapper = renderer.create(<StartQuiz navigation={navigationMock} />).getInstance();
         expect(wrapper.state.isQuestion).toBeTruthy();
@@ -75,9 +74,8 @@ describe('[Component] StartQuiz', () => {
         // expect(wrapper.toJSON()).toMatchSnapshot();
 
         const wrapper = shallow(<StartQuiz navigation={navigationMock} />);
-        wrapper.setState({ currentIndex: 2 });
+        wrapper.setState({ currentIndex: 3 });
         expect(wrapper).toMatchSnapshot();
     })
-
     
 })
