@@ -25,7 +25,7 @@ To run this project in your local machine:
   
   Make sure your phone and PC are both on the same network. So, to guarantee the app will run on your phone device, override the IP address/hostname that is detected by Create React Native App doing the following before running `npm start`:
 
-  * Specify your own hostname via the `REACT_NATIVE_PACKAGER_HOSTNAME` environment variable. So, if my IPv4 wi-fi address was `192.168.25.48`, for example, I'd do
+  * Specify your own hostname via the `REACT_NATIVE_PACKAGER_HOSTNAME` environment variable. So, if your IPv4 wi-fi address was `192.168.25.48`, for example, you'd do
 
     Mac and Linux:
 
