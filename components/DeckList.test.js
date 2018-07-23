@@ -63,6 +63,13 @@ describe('[Component] DeckList', () => {
         expect(navigation.navigate).toHaveBeenCalledTimes(1);
     });
 
+    it('calls the removeDeck method', () => {
+        const navigation = { navigate: jest.fn() }
+        const dispatch = jest.fn()
+        const wrapper = shallow(<DeckList decks={data} navigation={navigation} dispatch={dispatch} />);
+        wrapper.instance().removeDeck();
+    });
+
     // it('calls getDecks method inside componentDidMount', () => {
     //     // console.log(DeckList.prototype)
     //     const spy = jest.spyOn(DeckList.prototype, 'getDecks');
