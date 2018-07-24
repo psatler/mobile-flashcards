@@ -1,7 +1,7 @@
 # Mobile Flashcards
 > Final assessment project for Udacity's React Native course, in order to demonstrate understanding of the basics of React Native
 
-Mobile Flashcards is an app which allows the users study a collection of flashcards. Users can create different categories of flashcards called as "Decks", also being able to add cards and do quizzes on those decks.
+Mobile Flashcards is an app which allows the users study a collection of flashcards. Users can create different categories of flashcards called "Decks", also being able to add cards and do quizzes on those decks.
 
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 
@@ -11,24 +11,22 @@ Open your [Expo App](https://expo.io/) and scan the QR code below to experience 
 ------- FILL HERE WITH QR CODE
 
 ## TL;DR
-To run this project
 
-To run this project in your local machine:
-* Clone this git repository 
-    - `git clone https://github.com/psatler/mobile-flashcards.git`
+To run this project in your local machine (this assumes you here Expo installed):
 
-* Install the dependencies
-    - `cd mobile-flashcards`
-    - `npm install`
-* Start the application
-    - `npm start`
-  
-  Make sure your phone and PC are both on the same network. So, to guarantee the app will run on your phone device, override the IP address/hostname that is detected by Create React Native App doing the following before running `npm start`:
+```
+  git clone https://github.com/psatler/mobile-flashcards.git
+  cd mobile-flashcards
+  npm install
+  npm start
+```
+
+  Make sure your phone and PC are both on the same wireless network. So, to guarantee the app will run on your phone device, override the IP address/hostname that is detected by Create React Native App doing the following before running `npm start`:
 
   * Specify your own hostname via the `REACT_NATIVE_PACKAGER_HOSTNAME` environment variable. So, if your IPv4 wi-fi address was `192.168.25.48`, for example, you'd do
 
     Mac and Linux:
-
+  
     ```
     REACT_NATIVE_PACKAGER_HOSTNAME='192.168.25.48' npm start
     ```
@@ -39,10 +37,33 @@ To run this project in your local machine:
     npm start
     ```
 
+To run tests, instead of `npm start`, you should use `npm test` or `npm test -- --coverage` to see the coverage report at the end. 
 
 ## Where this project was tested on
 
 make a table here
+
+## Some Features
+
+- The user can add a deck to a list of decks. Add a card to a specific deck. Test himself/herself doing quiz. 
+- At the main screen there is an animated header which shrinks as the user scrolls up (it has to have several decks to see this effect happen).
+- At the Add New Deck screen, the user can also insert an image avatar from camera roll it's gives the app permission to have access to.
+- There is also a local notification fired at 10 AM daily to remember the user to study a quiz if he hasn't done this. When the user completes a quiz, the nofication is cancelled and re-scheduled for the following day at 10 AM again. 
+
+## Main Dependencies
+
+* [React-Native:](https://facebook.github.io/react-native/) Build native mobile apps using JavaScript and React
+* [Expo:](https://expo.io/learn) Free and open source toolchain built around React Native to help you build native iOS and Android projects using JavaScript and React
+* [Redux:](https://redux.js.org/) A predictable state container for JavaScript apps.
+* [React-redux:](https://github.com/reduxjs/react-redux) Official React bindings for Redux
+* [Redux-Thunk:](https://github.com/reduxjs/redux-thunk) Thunk middleware for Redux
+* [React-Navigation:](https://reactnavigation.org/) Routing and navigation for your React Native apps
+* [React-Native-Progress:](https://github.com/oblador/react-native-progress) Progress indicators and spinners for React Native using ReactART.
+* [Jest Unit Testing:](https://jestjs.io/) Delightful JavaScript Testing developed by Facebook
+* [Enzyme JS Testing Utility:](http://airbnb.io/enzyme/) Developed by Airbnb to make it easier to assert React Components. 
+
+
+
 
 Below you'll find information about performing common tasks. The most recent version of this guide is available [here](https://github.com/react-community/create-react-native-app/blob/master/react-native-scripts/template/README.md).
 
