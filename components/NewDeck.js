@@ -45,8 +45,6 @@ export class NewDeck extends Component { //exporting for testing purposes
                 image: null,
             })
 
-            
-            // this.props.navigation.navigate('DeckList') //go back to home
             this.props.navigation.navigate('DeckDetail', { //go to details screen of the newly created deck
                 deckTitle: deck.title,
                 deckLength: deck.questions.length

@@ -64,7 +64,8 @@ export default class FlipCardAnimation extends Component {
                 inputRange: [89, 90],
                 outputRange: [1, 0]
             }), 
-        }
+        };
+
         const backAnimatedStyle = {
           transform: [
             { rotateY: animatedValue.interpolate({
@@ -77,7 +78,7 @@ export default class FlipCardAnimation extends Component {
                 inputRange: [89, 90], 
                 outputRange: [0, 1] 
             }), 
-        }
+        };
         
         return (
 

@@ -10,7 +10,7 @@ import { removeDeck } from '../actions'
 
 export class DeckDetail extends Component {
     componentDidMount(){
-        //setting this so we can ref the method inside the nav options, being able 
+        //setting this so we can ref the method inside the nav options
         this.props.navigation.setParams({ handleRemove: this.showDeleteConfirmation })
     }
 
@@ -72,7 +72,7 @@ export class DeckDetail extends Component {
     render() {
         const singleDeck = this.props.deck; //deck filtered in mapStateToProps
   
-        if(singleDeck === undefined){ //after removing a deck, before going back to main screen, this Component was rendering again, but this time "singleDeck" object is undefined (since it was removed). Therefore, it was causing an error of "Undefined is not an object (evaluating 'singleDeck.title)"
+        if(singleDeck === undefined){ //after removing a deck, before going back to main screen, this Component was rendering again, but this time "singleDeck" object is undefined (since it was removed). Therefore, it was causing an error of "Undefined is not an object (evaluating 'singleDeck.title)", so tha's why this if statement here.
             return (<View></View>)
         }
 
@@ -108,7 +108,7 @@ export class DeckDetail extends Component {
     }
 }
 
-//exporting mapStateToProps to test it (testing passing the store was not working - line 46 of test file)
+//exporting mapStateToProps to test it (testing passing the store was not working - line 48 of test file)
 export const mapStateToProps = (state, { navigation }) => { //passing the state and the current props
     const { deckTitle } = navigation.state.params;
     const key = deckTitle.split(' ').join('');

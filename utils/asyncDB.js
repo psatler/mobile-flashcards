@@ -43,7 +43,6 @@ export const addCardToDeck = (deckTitle, card) => {
             deck.questions.push(card);
 
             AsyncStorage.setItem(FLASHCARDS_DECKS_KEY, JSON.stringify(allDecks)); //updating 
-
     })
 }
 

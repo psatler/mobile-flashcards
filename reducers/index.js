@@ -11,14 +11,12 @@ const deckInit = {};
 export const deckReducer = (state = deckInit, action) => { //using export here for unit test purposes
     switch(action.type){
         case RETRIEVE_DECKS:
-            // console.log('RETRIEVE_DECKS', action.payload)
             return {
                 ...state,
                 ...action.payload,
             }
 
         case ADD_DECK:
-            // const key = action.key;
             return {
                 ...state,
                 ...action.payload, //which is a single deck object
@@ -27,12 +25,10 @@ export const deckReducer = (state = deckInit, action) => { //using export here f
         case ADD_CARD:
             const key = action.title;
             const newQuestion = action.payload;
-            // console.log('state', state)
             const title = state[key].title; //title without space modification
             const deckQuestions = state[key].questions.concat(newQuestion);
             const imageURI = state[key].image;
             const dataOfCreation = state[key].createdAt;
-            // deck.questions.concat(newQuestion);
             
             return {
                 ...state,
