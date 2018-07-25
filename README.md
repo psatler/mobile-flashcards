@@ -12,6 +12,7 @@ This project was bootstrapped with [Create React Native App](https://github.com/
 * [Where this project was tested on](#Where-this-project-was-tested-on)
 * [Some Features](#some-features)
 * [Main Dependencies](#main-dependencies)
+* [License](#license)
 
 
 ## Demo
@@ -90,5 +91,8 @@ Using Mobile Flashcards...
 * [Jest Unit Testing:](https://jestjs.io/) Delightful JavaScript Testing developed by Facebook
 * [Enzyme JS Testing Utility:](http://airbnb.io/enzyme/) Developed by Airbnb to make it easier to assert React Components. 
 
+## License
+
+This project is licensed under the terms of the [MIT License](https://opensource.org/licenses/mit-license.html) © Pablo Satler 2018
 
 
