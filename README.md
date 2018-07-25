@@ -28,12 +28,12 @@ To run this project in your phone device (this assumes you have Expo installed):
     Mac and Linux:
   
     ```
-    REACT_NATIVE_PACKAGER_HOSTNAME='192.168.XX.XX' npm start
+    REACT_NATIVE_PACKAGER_HOSTNAME=192.168.XX.XX npm start
     ```
 
     Windows:
     ```
-    set REACT_NATIVE_PACKAGER_HOSTNAME='192.168.XX.XX'
+    set REACT_NATIVE_PACKAGER_HOSTNAME=192.168.XX.XX
     npm start
     ```
 
