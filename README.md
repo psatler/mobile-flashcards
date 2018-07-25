@@ -10,6 +10,14 @@ Open your [Expo App](https://expo.io/) and scan the QR code below to experience 
 
 ![Expo QR Code](/assets/expo_qrCode.PNG)
 
+Animations recorded on Moto G (Android 6.0). It was kind of laggy though on that phone.
+
+<!-- <img src="./assets/gifs/startAndQuiz.gif" width="300" height="600" /> -->
+
+![startAndQuizGif](/assets/gifs/startAndQuiz.gif)
+![headerAnimationGif](/assets/gifs/headerAnimation.gif)
+![newDeckGif](/assets/gifs/addingNewDeck.gif)
+
 ## TL;DR
 
 To run this project in your phone device (this assumes you have Expo installed):
