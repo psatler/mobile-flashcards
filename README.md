@@ -8,7 +8,7 @@ This project was bootstrapped with [Create React Native App](https://github.com/
 ## Table of Contents
 
 * [Demo](#demo)
-* [TL;DR](#tl;dr)
+* [TL;DR](#tldr)
 * [Where this project was tested on](#Where-this-project-was-tested-on)
 * [Some Features](#some-features)
 * [Main Dependencies](#main-dependencies)
