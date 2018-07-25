@@ -61,6 +61,7 @@ export class DeckList extends Component { //DeckList is the main screen (initial
         const { isLoading, scrollY } = this.state;
         const { decks } = this.props; // decks come from mapStateToProps
 
+
         // #### interpolations for header animation ####
         const headerHeight = scrollY.interpolate( { //this is used below so the height changes as the user scrolls
             inputRange: [0, HEADER_SCROLL_DISTANCE],
@@ -82,10 +83,16 @@ export class DeckList extends Component { //DeckList is the main screen (initial
 
         // interpolations for header title
         const titleScale = scrollY.interpolate({
-            inputRange: [0, HEADER_SCROLL_DISTANCE / 2, HEADER_SCROLL_DISTANCE],
+            inputRange: [0, HEADER_SCROLL_DISTANCE/2, HEADER_SCROLL_DISTANCE],
             outputRange: [0, 0, 1],
             extrapolate: 'clamp',
         });
+
+        const titleOpacity = scrollY.interpolate({
+            inputRange: [0, HEADER_SCROLL_DISTANCE / 2, HEADER_SCROLL_DISTANCE],
+            outputRange: [0, 0, 1], //initially setting the opacity to zero to hide the text
+            extrapolate: 'clamp',
+          });
         
         if(!isLoading){ //isLoading 
             return <AppLoading />
@@ -154,7 +161,7 @@ export class DeckList extends Component { //DeckList is the main screen (initial
                             styles.backgroundImage,
                             {
                                 opacity: imageOpacity,
-                                transform: [ { translateY: imageTranslate,} ]
+                                transform: [ { translateY: imageTranslate, }, ]
                             }
                         ]}
                         source={ require('../assets/reactNativeLightBlueBackground.png')}
@@ -165,7 +172,10 @@ export class DeckList extends Component { //DeckList is the main screen (initial
                         <Animated.Text style={[
                             styles.title, 
                             {
-                                transform: [ { scale: titleScale }, ]
+                                opacity: titleOpacity,
+                                transform: [ 
+                                    { scale: titleScale },  
+                                ]
                             }
                             ]}
                         >
