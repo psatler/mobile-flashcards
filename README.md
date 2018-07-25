@@ -6,7 +6,7 @@ Mobile Flashcards is an app which allows the users study a collection of flashca
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 
 ## Demo
-Open your [Expo App](https://expo.io/) and scan the QR code below to experience Mobile Flashcards on your phone. More details on the [project's expo page](https://expo.io/@psatler/mobileflashcards).
+Open your [Expo App](https://expo.io/) and scan the QR code below to experience Mobile Flashcards on your phone. More details on the [project's expo page](https://expo.io/@psatler/mobileflashcardspsatler).
 
 ![Expo QR Code](/assets/expo_qrCode.PNG)
 
