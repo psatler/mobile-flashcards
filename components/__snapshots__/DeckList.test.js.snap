@@ -148,6 +148,7 @@ ShallowWrapper {
                     "fontSize": 18,
                   },
                   Object {
+                    "opacity": 0,
                     "transform": Array [
                       Object {
                         "scale": 0,
@@ -379,6 +380,7 @@ ShallowWrapper {
                       "fontSize": 18,
                     },
                     Object {
+                      "opacity": 0,
                       "transform": Array [
                         Object {
                           "scale": 0,
@@ -473,6 +475,7 @@ ShallowWrapper {
                       "fontSize": 18,
                     },
                     Object {
+                      "opacity": 0,
                       "transform": Array [
                         Object {
                           "scale": 0,
@@ -510,6 +513,7 @@ ShallowWrapper {
                     "fontSize": 18,
                   },
                   Object {
+                    "opacity": 0,
                     "transform": Array [
                       Object {
                         "scale": 0,
@@ -696,6 +700,7 @@ ShallowWrapper {
                       "fontSize": 18,
                     },
                     Object {
+                      "opacity": 0,
                       "transform": Array [
                         Object {
                           "scale": 0,
@@ -927,6 +932,7 @@ ShallowWrapper {
                         "fontSize": 18,
                       },
                       Object {
+                        "opacity": 0,
                         "transform": Array [
                           Object {
                             "scale": 0,
@@ -1021,6 +1027,7 @@ ShallowWrapper {
                         "fontSize": 18,
                       },
                       Object {
+                        "opacity": 0,
                         "transform": Array [
                           Object {
                             "scale": 0,
@@ -1058,6 +1065,7 @@ ShallowWrapper {
                       "fontSize": 18,
                     },
                     Object {
+                      "opacity": 0,
                       "transform": Array [
                         Object {
                           "scale": 0,

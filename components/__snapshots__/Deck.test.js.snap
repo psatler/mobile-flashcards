@@ -149,6 +149,21 @@ exports[`[Component] Deck renders correctly - no image from camera roll inserted
        cards
     </Text>
   </View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 0.5,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    />
+  </View>
 </View>
 `;
 
@@ -229,6 +244,21 @@ exports[`[Component] Deck renders correctly - with image from camera roll insert
        cards
     </Text>
   </View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 0.5,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+    />
+  </View>
 </View>
 `;
 
@@ -304,6 +334,21 @@ exports[`[Component] Deck renders user shallow correctly 1`] = `
       1
        cards
     </Text>
+  </Component>
+  <Component
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 0.5,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <Icon
+      allowFontScaling={false}
+      name="dots-three-vertical"
+      size={30}
+    />
   </Component>
 </Component>
 `;
