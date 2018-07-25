@@ -41,11 +41,9 @@ To run tests, instead of `npm start`, you should use `npm test` or `npm test -- 
 
 ## Where this project was tested on
 
-make a table here
-
-- iphone 5
-- Genymotion emulating Google Nexus 5 - 6.0.0 - API 23 - 1080x1920
-- Tablet Dell Venue 8
+- Iphone 5
+- Moto G (Android 6.0) 1280x720
+- Tablet Dell Venue 8 (Android 4.4.2)
 
 
 ## Some Features
