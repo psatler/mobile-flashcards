@@ -12,13 +12,15 @@ Open your [Expo App](https://expo.io/) and scan the QR code below to experience 
 
 Animations recorded on Moto G (Android 6.0). It was kind of laggy though on that phone.
 
-<img src="./assets/gifs/startAndQuiz.gif" width="250" height="450" />
-<img src="./assets/gifs/headerAnimation.gif" width="250" height="450" />
-<img src="./assets/gifs/addingNewDeck.gif" width="250" height="450" />
+<!-- <img src="./assets/gifs/startAndQuiz.gif" width="250" height="450" />
 
-<!-- ![startAndQuizGif](/assets/gifs/startAndQuiz.gif)
+<img src="./assets/gifs/headerAnimation.gif" width="250" height="450" />
+
+<img src="./assets/gifs/addingNewDeck.gif" width="250" height="450" /> -->
+
+![startAndQuizGif](/assets/gifs/startAndQuiz.gif)
 ![headerAnimationGif](/assets/gifs/headerAnimation.gif)
-![newDeckGif](/assets/gifs/addingNewDeck.gif) -->
+![newDeckGif](/assets/gifs/addNewDeck.gif)
 
 ## TL;DR
 
