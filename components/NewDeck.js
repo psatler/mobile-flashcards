@@ -26,7 +26,7 @@ export class NewDeck extends Component { //exporting for testing purposes
     submitDeck = () => {
         const { input, image } = this.state;
 
-        if(input){
+        if(input.trim()){
             const deck = {
                 title: input,
                 image: image,
